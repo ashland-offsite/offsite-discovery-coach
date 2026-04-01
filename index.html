@@ -727,7 +727,7 @@ const TREE = {
     question: 'How are you currently going about link building?',
     type: 'question',
     choices: [
-      { label: 'Working with an agency', next: 'b1_diagnosis' },
+      { label: 'Working with an agency', next: 'b1_links_question' },
       { label: 'Handling it internally', next: 'b2_check1' }
     ],
     coaching: {
@@ -743,7 +743,7 @@ const TREE = {
     question: 'If you were to invest in mention building, would you handle it internally or work with an agency?',
     type: 'question',
     choices: [
-      { label: 'Work with an agency', next: 'b1_diagnosis' },
+      { label: 'Work with an agency', next: 'b1_links_question' },
       { label: 'Handle it internally', next: 'b2_check1' }
     ],
     coaching: {
@@ -753,19 +753,66 @@ const TREE = {
   },
 
   /* ── Path B1: Agency ── */
+  b1_links_question: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'Ask the prospect: How many links is your agency getting per month? What defines quality for you?',
+    type: 'educate',
+    body: 'Let them answer. You\'re listening for two things: volume (are they actually getting consistent placements?) and how they define quality (DA score? traffic? relevance?). Most prospects will say something like "high DA sites" or "authoritative publications" — that\'s your opening for the next question.',
+    choices: [
+      { label: 'Got their answer — continue', next: 'b1_cited_sites' }
+    ],
+    coaching: {
+      title: 'What to listen for',
+      body: 'Volume and quality definition are your diagnostic signals. Low volume means the agency isn\'t executing at scale. "High DA" as a quality signal means they\'re optimizing for traditional search — not AI. Either answer sets up the reframes on the next two cards.',
+    }
+  },
+
+  b1_cited_sites: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'Do you know if your agency is reaching out to highly cited sites?',
+    type: 'educate',
+    body: 'Most link-building agencies focus on link building for traditional search — which means targeting high DA sites. In the world of AI, DA isn\'t the North Star. LLMs pull from small to medium sized publishers — the long tail — and most of those sites don\'t even have a measurable DA. If the agency is only chasing high-DA placements, they\'re missing the majority of sources that actually drive AI mentions.',
+    choices: [
+      { label: 'Understood — continue', next: 'b1_domain_infra' }
+    ],
+    coaching: {
+      title: 'The long-tail publisher gap',
+      body: 'This is the single biggest gap most agencies have. High-DA targeting is the right instinct for Google — but LLMs don\'t work that way. They pull from thousands of niche, category-specific sites that happen to produce the content format (listicles, comparisons, reviews) that AI systems index heavily. Agencies without citation data simply don\'t know these sites exist.',
+      stat: { label: 'Reframe to use', text: '"In AI search, a mid-DA comparison site that covers your category is worth more than a placement on Forbes. Your agency is probably not targeting those sites."' }
+    }
+  },
+
+  b1_domain_infra: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'Does your agency know how to send high-volume outreach and set up domain infrastructure at scale?',
+    type: 'educate',
+    body: 'On average, one AI prompt has 65 citations — and a single prompt topic can have 40 to 50 variations. To meaningfully move your AI mention rate, you likely need placements on hundreds or even thousands of publisher sites. That requires serious outreach infrastructure: dedicated sending domains, warming sequences, personalization at scale. Most traditional link-building agencies aren\'t built for this volume.',
+    choices: [
+      { label: 'Got it — continue to agency diagnosis', next: 'b1_diagnosis' }
+    ],
+    coaching: {
+      title: 'Why scale is a new requirement',
+      body: 'Traditional link building targets dozens of placements. AI visibility requires hundreds to thousands. The math changes everything: if one prompt topic needs 40-50 prompt variants, and each pulls from 65 sources, you\'re looking at thousands of citation opportunities across a single topic. That\'s not a PR motion — it\'s an outreach infrastructure motion.',
+      stat: { label: 'Scale stat', text: 'One prompt = ~65 citations. One topic = 40-50 prompts. Moving your mention rate meaningfully requires hundreds to thousands of placements — not the dozens most agencies deliver.' }
+    }
+  },
+
   b1_diagnosis: {
     section: 3,
     pill: 'Path B1 — Agency',
     question: 'Diagnose their agency relationship.',
     type: 'educate',
-    body: 'Ask: How many links per month are they getting? What defines quality for them? Most agencies optimize for high Domain Authority — they\'re NOT targeting AI-cited sources. The missing layer is Citation Data. Once you\'ve diagnosed, the key question is whether they\'re happy with the agency or not.',
+    body: 'You\'ve surfaced the gaps — now read the room. The goal here is NOT to give the agency a vote of no confidence. If they\'re happy with the relationship, you don\'t want to rip and replace. You need to see if they crack open a door first. Listen for frustration, unmet expectations, or openness to change before positioning Offsite as a replacement. If the door is closed, position Offsite as an add-on.',
     choices: [
       { label: 'Diagnosed — continue to satisfaction check', next: 'b1_satisfaction' }
     ],
     coaching: {
-      title: 'What agencies are missing',
-      body: 'Most link-building agencies don\'t track which sources LLMs actually cite. They optimize for DA — a metric that doesn\'t predict AI visibility. 85% of AI citations come from listicles, comparisons, and review content — formats most agencies don\'t target. AirOps\'s Influence Score (citation frequency + DA + content relevance) reveals the specific sites that actually move the needle.',
-      stat: { label: 'The gap to surface', text: 'Agencies optimize for Domain Authority. But the top AI-cited sources are often mid-DA comparison and review sites — not the high-DA publications agencies typically target.' }
+      title: 'Don\'t rip and replace unless invited',
+      body: 'The agency gaps you just surfaced are real — but leading with "your agency is missing this" can backfire if the prospect loves their agency. Your job is to diagnose satisfaction, not create doubt. If they\'re happy: position Offsite as a layer on top. If they\'re frustrated or questioning results: that\'s your opening to position fully managed as a replacement. Wait for the door to open.',
+      stat: { label: 'The rule', text: 'Happy agency = Offsite as a force multiplier ($3K/mo). Unhappy agency = Offsite fully managed as a replacement ($5K/mo). Don\'t jump to replacement before you know which you\'re dealing with.' }
     }
   },
 
