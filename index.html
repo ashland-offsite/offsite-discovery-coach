@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offsite Discovery Coach — AirOps</title>
+  <style>
+    /* ── Brand tokens ─────────────────────────────────────────── */
+    :root {
+      --white: #ffffff;
+      --off-white: #F8FFFA;
+      --near-black: #000d05;
+      --green-50: #f8fffb;
+      --green-100: #dfeae3;
+      --green-200: #CCFFE0;
+      --green-500: #008c44;
+      --green-600: #002910;
+      --interaction: #00ff64;
+      --accent-label: #EEFF8C;
+      --text-primary: #09090b;
+      --text-secondary: #676c79;
+      --text-tertiary: #a5aab6;
+      --stroke-primary: #ecedef;
+      --stroke-green: #d4e8da;
+      --font-sans: 'Saans', 'Helvetica Neue', Arial, sans-serif;
+      --font-serif: 'Serrif VF', Georgia, serif;
+      --font-mono: 'Saans Mono', 'DM Mono', 'Courier New', monospace;
+    }
+
+    /* ── Reset ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--off-white);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* ── Header ───────────────────────────────────────────────── */
+    .site-header {
+      background: var(--green-600);
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo svg { display: block; height: 22px; width: auto; }
+
+    .header-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--near-black);
+      background: var(--accent-label);
+      padding: 4px 10px;
+      border-radius: 0;
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      background: var(--near-black);
+      padding: 48px 48px 40px;
+      border-bottom: 1px solid var(--green-500);
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--interaction);
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: 40px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.04;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+      max-width: 560px;
+    }
+
+    /* ── Progress bar ─────────────────────────────────────────── */
+    .progress-bar-wrapper {
+      background: var(--white);
+      border-bottom: 1px solid var(--stroke-green);
+      padding: 0 48px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      overflow-x: auto;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px 14px 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .progress-step + .progress-step {
+      padding-left: 20px;
+      border-left: 1px solid var(--stroke-primary);
+      margin-left: 0;
+    }
+
+    .progress-step.active { color: var(--green-500); border-bottom-color: var(--green-500); }
+    .progress-step.done { color: var(--text-secondary); border-bottom-color: var(--green-100); }
+
+    .step-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ── Main layout ──────────────────────────────────────────── */
+    .main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── Answered cards (history) ─────────────────────────────── */
+    .history { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+
+    .history-card {
+      background: var(--white);
+      border: 1px solid var(--stroke-green);
+      border-radius: 0;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      opacity: 0.7;
+    }
+
+    .history-check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--green-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .history-check svg { display: block; }
+
+    .history-q {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .history-a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green-500);
+    }
+
+    /* ── Active question card ─────────────────────────────────── */
+    .active-card-wrapper {
+      perspective: 1200px;
+    }
+
+    .flip-card {
+      width: 100%;
+      min-height: 280px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .flip-card.flipped { transform: rotateY(180deg); }
+
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .flip-face.back {
+      transform: rotateY(180deg);
+    }
+
+    /* Front face */
+    .card-front {
+      background: var(--white);
+      border: 1px solid var(--stroke-green);
+      border-left: 3px solid var(--green-500);
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      min-height: 280px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .card-front.outcome-card {
+      border-left: 3px solid var(--interaction);
+      background: var(--green-600);
+      color: var(--white);
+    }
+
+    .card-front.educate-card {
+      border-left: 3px solid var(--accent-label);
+      background: #fefffe;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      background: var(--accent-label);
+      border: none;
+      border-radius: 0;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--near-black);
+      line-height: 1;
+    }
+
+    .pill.pill-green {
+      background: var(--green-200);
+      color: var(--green-600);
+    }
+
+    .pill.pill-dark {
+      background: var(--green-500);
+      color: var(--white);
+    }
+
+    .card-question {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      flex: 1;
+    }
+
+    .outcome-card .card-question { color: var(--white); }
+
+    .card-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    /* Outcome details list */
+    .outcome-details {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .outcome-details li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.4;
+    }
+
+    .outcome-details li::before {
+      content: '→';
+      color: var(--interaction);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    /* Choices */
+    .card-choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .choice-btn {
+      background: var(--near-black);
+      color: var(--white);
+      border: none;
+      padding: 11px 20px;
+      border-radius: 0;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      line-height: 1;
+    }
+
+    .choice-btn:hover { background: var(--green-500); }
+    .choice-btn:active { transform: scale(0.98); }
+
+    .choice-btn.accent {
+      background: var(--interaction);
+      color: var(--near-black);
+    }
+
+    .choice-btn.accent:hover { background: #00e65c; }
+
+    /* Flip button */
+    .flip-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      background: none;
+      border: 1px solid var(--stroke-green);
+      padding: 6px 12px;
+      border-radius: 0;
+      cursor: pointer;
+      margin-left: auto;
+      margin-top: 20px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .flip-toggle:hover { color: var(--green-500); border-color: var(--green-500); }
+
+    .outcome-card .flip-toggle {
+      border-color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+    }
+    .outcome-card .flip-toggle:hover {
+      color: var(--interaction);
+      border-color: var(--interaction);
+    }
+
+    /* Back face (coaching) */
+    .card-back {
+      background: var(--green-600);
+      border: 1px solid var(--green-500);
+      border-left: 3px solid var(--interaction);
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      min-height: 280px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .coaching-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--interaction);
+      margin-bottom: 12px;
+    }
+
+    .coaching-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .coaching-body {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .coaching-stat {
+      margin-top: 20px;
+      padding: 14px 16px;
+      background: rgba(0,255,100,0.08);
+      border-left: 2px solid var(--interaction);
+    }
+
+    .coaching-stat p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
+
+    .coaching-stat strong {
+      color: var(--interaction);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Restart button */
+    .restart-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 1px solid var(--stroke-green);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 0;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      margin-top: 24px;
+    }
+    .restart-btn:hover { color: var(--green-500); border-color: var(--green-500); }
+
+    /* Research link */
+    .card-research-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green-500);
+      text-decoration: none;
+      border-bottom: 1px solid var(--stroke-green);
+      padding-bottom: 1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .card-research-link:hover { color: var(--green-600); border-color: var(--green-500); }
+
+    /* Inline back button inside card-meta */
+    .card-back-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      cursor: pointer;
+      padding: 2px 0;
+      transition: color 0.15s;
+    }
+    .card-back-btn:hover { color: var(--green-500); }
+    .outcome-card .card-back-btn { color: rgba(255,255,255,0.35); }
+    .outcome-card .card-back-btn:hover { color: var(--interaction); }
+
+    /* Animate-in for new cards */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .slide-in { animation: slideIn 0.35s ease both; }
+
+    /* Reframe callout */
+    .reframe-box {
+      margin: 20px 0 0;
+      padding: 14px 16px;
+      background: var(--green-50);
+      border: 1px solid var(--stroke-green);
+      border-left: 3px solid var(--green-500);
+    }
+    .reframe-box p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .reframe-box strong { color: var(--green-600); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .site-header { padding: 0 20px; }
+      .hero { padding: 32px 20px 28px; }
+      .hero h1 { font-size: 28px; }
+      .progress-bar-wrapper { padding: 0 20px; }
+      .main { padding: 28px 16px 64px; }
+      .card-front, .card-back { padding: 20px; }
+      .card-question { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="logo">
+    <svg width="120" height="39" viewBox="0 0 784 252" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M111.828 65.6415V88.4663C101.564 72.0112 85.627 61.9258 65.9084 61.9258C23.7703 61.9258 0 92.9782 0 134.647C0 176.581 24.0404 208.695 66.4487 208.695C86.1672 208.695 101.834 198.609 111.828 182.154V204.979H144.782V65.6415H111.828ZM72.9315 181.093C48.8911 181.093 35.1152 159.064 35.1152 134.647C35.1152 110.76 48.621 89.7933 73.4717 89.7933C94.0006 89.7933 111.558 104.391 111.558 134.116C111.558 163.31 94.8109 181.093 72.9315 181.093Z" fill="#ffffff"/>
+      <path d="M173.137 65.6494V204.987H208.252V65.6494H173.137Z" fill="#ffffff"/>
+      <path d="M272.998 100.141V65.6386H237.883V204.976H272.998V125.355C272.998 104.919 287.314 96.691 300.82 96.691C308.653 96.691 316.757 98.8143 321.079 100.407V63.25C298.119 63.25 279.211 76.7856 272.998 100.141Z" fill="#ffffff"/>
+      <path d="M329.629 108.115C329.629 151.377 359.882 182.163 403.371 182.163C447.13 182.163 477.115 151.377 477.115 108.115C477.115 65.6507 447.13 35.3945 403.371 35.3945C359.882 35.3945 329.629 65.6507 329.629 108.115ZM441.997 108.115C441.997 135.187 427.141 154.561 403.371 154.561C379.33 154.561 364.744 135.187 364.744 108.115C364.744 82.1058 379.33 63.2621 403.371 63.2621C427.141 63.2621 441.997 82.1058 441.997 108.115Z" fill="#ffffff"/>
+      <path d="M575.086 61.9258C554.557 61.9258 537.81 73.869 528.896 92.9782V65.6415H493.781V251.425H528.896V180.031C538.891 197.282 557.529 208.695 577.247 208.695C615.604 208.695 642.345 179.235 642.345 137.035C642.345 92.7128 614.523 61.9258 575.086 61.9258ZM568.874 182.685C545.374 182.685 528.896 163.31 528.896 135.708C528.896 107.31 545.374 87.4047 568.874 87.4047C591.293 87.4047 607.23 107.841 607.23 136.77C607.23 163.841 591.293 182.685 568.874 182.685Z" fill="#ffffff"/>
+      <path d="M653.555 156.675C653.555 181.889 676.244 208.695 721.624 208.695C767.274 208.695 783.751 182.42 783.751 161.983C783.751 130.666 746.205 125.092 721.084 120.315C704.066 117.395 693.262 115.007 693.262 105.452C693.262 94.5706 705.417 87.6701 718.383 87.6701C735.94 87.6701 742.693 99.6133 743.233 112.353H778.349C778.349 91.6511 763.492 61.9258 717.572 61.9258C677.865 61.9258 658.147 83.9544 658.147 107.575C658.147 141.282 696.233 144.732 721.354 149.509C735.94 152.163 748.636 155.348 748.636 165.699C748.636 176.05 736.21 182.95 722.975 182.95C710.549 182.95 688.67 176.05 688.67 156.675H653.555Z" fill="#ffffff"/>
+      <path d="M191.339 48.6576C176.921 48.6576 166.578 38.4949 166.578 24.6368C166.578 10.7786 176.921 0 191.339 0C205.13 0 216.1 10.7786 216.1 24.6368C216.1 38.4949 205.13 48.6576 191.339 48.6576Z" fill="#ffffff"/>
+    </svg>
+  </div>
+  <div class="header-pill">Offsite</div>
+</header>
+
+<!-- ── Hero ────────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-eyebrow">Sales Discovery Tool</div>
+  <h1>Offsite discovery coach</h1>
+  <p>Walk through the discovery conversation step by step. Answer each question as your prospect would. Flip any card to test your coaching knowledge before moving on.</p>
+</div>
+
+<!-- ── Progress bar ──────────────────────────────────────── -->
+<div class="progress-bar-wrapper" id="progressBar">
+  <div class="progress-step active" data-section="1">
+    <span class="step-dot"></span>AI visibility priority
+  </div>
+  <div class="progress-step" data-section="2">
+    <span class="step-dot"></span>Link building status
+  </div>
+  <div class="progress-step" data-section="3">
+    <span class="step-dot"></span>Execution approach
+  </div>
+  <div class="progress-step" data-section="4">
+    <span class="step-dot"></span>Recommendation
+  </div>
+</div>
+
+<!-- ── Main content ──────────────────────────────────────── -->
+<main class="main">
+  <div class="history" id="history"></div>
+  <div id="activeCard"></div>
+  <button class="restart-btn" id="restartBtn" onclick="restart()" style="display:none;">
+    ↺ &nbsp;Start over
+  </button>
+</main>
+
+<script>
+/* ─────────────────────────────────────────────────────────────────
+   Decision tree data
+───────────────────────────────────────────────────────────────── */
+const TREE = {
+
+  /* ── Section 1: AI Visibility Priority ── */
+  q1: {
+    section: 1,
+    pill: 'Section 1 — AI Visibility',
+    question: 'Is AI visibility a priority for you right now?',
+    type: 'question',
+    choices: [
+      { label: 'Yes — it\'s a priority', next: 'q1_offsite_educate' },
+      { label: 'No / Not sure yet', next: 'q1_objection' }
+    ],
+    coaching: {
+      title: 'Why AI visibility matters now',
+      body: 'AI search isn\'t a future trend — it\'s already changing where buyers go for answers. ChatGPT, Claude, Perplexity, and Google\'s AI Overviews are handling an increasing share of product discovery, category research, and vendor comparisons. Brands that aren\'t showing up in AI responses are already losing ground. This question opens the door: are they aware of the shift, or do you need to make the case first?',
+      stat: { label: 'The shift to know', text: 'AI-generated answers now influence a rapidly growing share of B2B research. Buyers are asking AI tools "what\'s the best tool for X" — and the brands cited in those answers win the consideration set before a human ever visits a website.' }
+    }
+  },
+
+  q1_offsite_educate: {
+    section: 1,
+    pill: '85% stat — AI Visibility',
+    question: '85% of AI visibility is won offsite — not on your own domain.',
+    type: 'educate',
+    body: '85% of AI visibility comes from third-party sources — listicles, comparison guides, review sites, niche publications. Not your blog, not your homepage. If a prospect wants to show up when buyers ask an AI "what\'s the best tool for X," they need to be mentioned on the sources those AI models actually pull from. That\'s the Offsite opportunity. That said, owned content still matters — it provides the substance that third-party sources cite and validate. Onsite and Offsite reinforce each other: owned content gives AI systems something credible to reference, earned coverage extends that narrative into discovery.',
+    link: { label: 'Read the research report →', url: 'https://www.airops.com/report/the-influence-of-offsite-signals-in-ai-search' },
+    choices: [
+      { label: 'Ask the prospect: Does this surprise you? — then continue', next: 'q1_product_overview' }
+    ],
+    coaching: {
+      title: 'Why open here',
+      body: 'AirOps research found that brands are 6.5x more likely to be cited through third-party sources than their own domains. Your website is almost irrelevant to AI visibility — what matters is what others say about you. This single insight sets up the entire Offsite value prop. If they\'re already bought in, move fast. If not, you have a reframe to make first.',
+      stat: { label: 'Lead with this', text: 'Brands are 6.5x more likely to be cited through third-party sources than their own domains. 85% of AI visibility comes from external sites — not your own content.' }
+    }
+  },
+
+  q1_product_overview: {
+    section: 1,
+    pill: '60-second pitch — Offsite',
+    question: 'Give a brief verbal overview of Offsite. No slides needed.',
+    type: 'educate',
+    body: '"Offsite is a new offering at AirOps that expands beyond Onsite — things like refreshing and creating blogs on your site. Offsite encompasses everything off your website: Reddit, LinkedIn, X, YouTube, media sites, niche blogs and third-party publishers, community forums, affiliates, marketplaces, and more. AirOps offers multiple Agent offerings within Offsite, and I can help figure out which is the best fit for you. I typically recommend starting with our Mention Building Agent — it helps reach out to third-party publishers to drive mentions. Think of it like link building, but for the world of AI."',
+    choices: [
+      { label: 'Overview delivered — continue to discovery', next: 'q2' }
+    ],
+    coaching: {
+      title: 'Tips for delivering this pitch',
+      body: 'Keep it conversational — this is a setup, not a close. The goal is to give them enough context so the discovery questions that follow make sense. Lead with the contrast: Onsite vs. Offsite. Name-drop the channels they\'ll recognize (Reddit, LinkedIn, YouTube) to make it concrete fast. End on Mention Building as the entry point — it frames the rest of the conversation around a specific, familiar motion (link building) rather than an abstract new category.',
+      stat: { label: 'The one-line version', text: '"It\'s link building — but targeting the sources AI models actually cite instead of just high-DA sites."' }
+    }
+  },
+
+  q1_objection: {
+    section: 1,
+    pill: 'Section 1 — Objection Handling',
+    question: 'Handle the objection, then align before proceeding.',
+    type: 'educate',
+    body: 'AI search is taking share from traditional search every month. Brands not investing now are falling behind — and the gap compounds over time. Position this as a forward-looking channel investment, not a replacement for what\'s working. Once the prospect is aligned on the risk of inaction, continue.',
+    choices: [
+      { label: 'Prospect is aligned — continue', next: 'q2' }
+    ],
+    coaching: {
+      title: 'How to frame the risk of inaction',
+      body: '"The brands winning in AI search right now are building moats. Waiting isn\'t neutral — it\'s falling behind." Use forward-looking framing. A key insight: 68% of brand mentions appear in only ONE AI platform — meaning even brands with some visibility are inconsistent across ChatGPT, Claude, and Perplexity. That gap compounds over time.',
+      stat: { label: 'Urgency stat', text: '68% of brand mentions appear in only one AI platform. Cross-platform consistency requires active investment — it doesn\'t happen on its own.' }
+    }
+  },
+
+  /* ── Section 2: Link Building Status ── */
+  q2: {
+    section: 2,
+    pill: 'Section 2 — Link Building',
+    question: 'What does your current link-building strategy look like?',
+    type: 'question',
+    choices: [
+      { label: 'Not doing link building today', next: 'q3_no_lb' },
+      { label: 'Yes, actively doing link building', next: 'q3_yes_lb' }
+    ],
+    coaching: {
+      title: 'Why link building status matters',
+      body: 'Traditional link building and mention building run on the same playbook: identify high-value target sites, find the right contact, send a personalized pitch, negotiate a placement. The difference is just the target. In link building, you optimize for Domain Authority. In mention building, you optimize for Citation Share — placements on the sources LLMs actually pull from. The infrastructure (domains, outreach sequences, publisher relationships) is nearly identical. That\'s why a prospect\'s existing link-building motion tells you exactly how much runway they already have for Offsite.',
+      stat: { label: 'Key format insight', text: '85% of third-party brand mentions in AI search come from listicles, comparisons, and reviews — the same content formats link builders have always targeted. Same motion, new metric.' }
+    }
+  },
+
+  q3_no_lb: {
+    section: 2,
+    pill: 'Section 2 — Not Doing Link Building',
+    question: 'Why are you not doing link building today?',
+    type: 'question',
+    choices: [
+      { label: 'We already have high domain authority', next: 'a1_high_da' },
+      { label: 'We haven\'t started / need to grow DA', next: 'a2_low_da' }
+    ],
+    coaching: {
+      title: 'How to read their answer',
+      body: 'High DA brands are prime Offsite customers — they\'ve already won the link building game and are ready for the next layer. Low DA brands need a split strategy: don\'t let them skip the foundation. Both paths converge on Section 3, but with different reframes.',
+    }
+  },
+
+  a1_high_da: {
+    section: 2,
+    pill: 'Path A — High DA',
+    question: 'Validate and reframe.',
+    type: 'educate',
+    body: '"That makes sense — a lot of brands reach a point where traditional link building hits diminishing returns." Shift the focus to AI visibility as their next growth lever. Introduce the concept: Link Building 2.0 = Mention Building. Same principles, different targets — top-cited sources instead of high-DA sites. The key reframe: their new North Star for identifying which publishers matter is Citation Share, not Domain Authority. They already know how to win in Google. Now they need to win in AI search — and the playbook is nearly identical.',
+    choices: [
+      { label: 'Prospect is following along — continue', next: 'q4_approach' }
+    ],
+    coaching: {
+      title: 'The Citation Share reframe',
+      body: 'Old world: Domain Authority = success metric. New world: Citation Share = success metric. They\'ve mastered the link building game — but DA doesn\'t predict AI visibility. AirOps uses an Influence Score (citation frequency + domain authority + content relevance) to identify which sources actually move the needle for LLMs. Use this framing: "You already win in Google. Now let\'s win in AI."',
+      stat: { label: 'New North Star', text: 'Citation Share + Influence Score — not Domain Authority. The sources LLMs cite most are often niche, mid-DA sites in the right content format (listicles, comparisons, reviews).' }
+    }
+  },
+
+  a2_low_da: {
+    section: 2,
+    pill: 'Path A — Low DA',
+    question: 'Educate on the split strategy.',
+    type: 'educate',
+    body: 'SEO is still foundational — they can\'t skip link building. But winning brands invest in both: traditional search (Google) and AI search (LLMs). Recommend a split: ~50% traditional link building, ~50% mention building. Mention building helps SEO, but alone won\'t build enough DA early on. Frame it as covering both bases from day one.',
+    choices: [
+      { label: 'Prospect understands the split strategy — continue', next: 'q4_approach' }
+    ],
+    coaching: {
+      title: 'Why the split strategy is the right call',
+      body: 'The dual investment covers both bases: domain authority for Google, citation share for AI. This is actually the strongest position for a brand building from scratch — they don\'t have to choose. And Offsite\'s mention building has a secondary SEO benefit. Important: the content types that earn AI citations are very specific — listicles, comparisons, reviews — so they can\'t assume traditional link building will accidentally cover this.',
+      stat: { label: 'Recommended split', text: '~50% traditional link building (for DA) + ~50% mention building targeting listicles, comparisons, and review content where 85% of AI citations originate.' }
+    }
+  },
+
+  q3_yes_lb: {
+    section: 2,
+    pill: 'Section 2 — Active Link Building',
+    question: 'How are you currently going about link building?',
+    type: 'question',
+    choices: [
+      { label: 'Working with an agency', next: 'b1_diagnosis' },
+      { label: 'Handling it internally', next: 'b2_check1' }
+    ],
+    coaching: {
+      title: 'Why this splits the path',
+      body: 'Agency and internal teams have very different gaps. Agencies optimize for DA and miss AI-cited sources — they need citation data to redirect their outreach. Internal teams need to be qualified on execution capability across three checks before you can make the right recommendation.',
+    }
+  },
+
+  /* ── Section 3: Execution Approach ── */
+  q4_approach: {
+    section: 3,
+    pill: 'Section 3 — Execution Approach',
+    question: 'If you were to invest in mention building, would you handle it internally or work with an agency?',
+    type: 'question',
+    choices: [
+      { label: 'Work with an agency', next: 'b1_diagnosis' },
+      { label: 'Handle it internally', next: 'b2_check1' }
+    ],
+    coaching: {
+      title: 'Why this is the key fork',
+      body: 'This question determines your product recommendation. Agency path leads to self-serve (data to feed the agency) or fully managed (replace the agency entirely). Internal path requires qualifying execution capability across three checks. Get a clear answer before moving on — "we might do both" is a non-answer.',
+    }
+  },
+
+  /* ── Path B1: Agency ── */
+  b1_diagnosis: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'Diagnose their agency relationship.',
+    type: 'educate',
+    body: 'Ask: How many links per month are they getting? What defines quality for them? Most agencies optimize for high Domain Authority — they\'re NOT targeting AI-cited sources. The missing layer is Citation Data. Once you\'ve diagnosed, the key question is whether they\'re happy with the agency or not.',
+    choices: [
+      { label: 'Diagnosed — continue to satisfaction check', next: 'b1_satisfaction' }
+    ],
+    coaching: {
+      title: 'What agencies are missing',
+      body: 'Most link-building agencies don\'t track which sources LLMs actually cite. They optimize for DA — a metric that doesn\'t predict AI visibility. 85% of AI citations come from listicles, comparisons, and review content — formats most agencies don\'t target. AirOps\'s Influence Score (citation frequency + DA + content relevance) reveals the specific sites that actually move the needle.',
+      stat: { label: 'The gap to surface', text: 'Agencies optimize for Domain Authority. But the top AI-cited sources are often mid-DA comparison and review sites — not the high-DA publications agencies typically target.' }
+    }
+  },
+
+  b1_satisfaction: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'How satisfied is the prospect with their agency\'s results?',
+    type: 'question',
+    choices: [
+      { label: 'Happy with the agency', next: 'outcome_b1a' },
+      { label: 'Unhappy with the agency', next: 'outcome_b1b' }
+    ],
+    coaching: {
+      title: 'How satisfaction shapes the recommendation',
+      body: 'Happy agency customers: the agency can keep executing — Offsite adds the citation data layer they\'re missing ($3K/mo self-serve). Unhappy agency customers: this is your opening to replace them entirely with a fully managed solution ($5K/mo). Don\'t try to sell both simultaneously.',
+    }
+  },
+
+  /* ── Path B2: Internal ── */
+  b2_check1: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Check 1 of 3: Do you know how to spin up domain infrastructure for cold outreach?',
+    type: 'question',
+    sub: 'Separate sending domains, warming sequences, DMARC/SPF setup.',
+    choices: [
+      { label: 'Yes, we can handle that', next: 'b2_check2' },
+      { label: 'Partially — would need support', next: 'outcome_selfserve' },
+      { label: 'No / Not sure', next: 'outcome_managed' }
+    ],
+    coaching: {
+      title: 'Check 1: Infrastructure',
+      body: 'Domain infrastructure is the foundation of scalable outreach. If they can\'t set this up — separate sending domains, warming sequences, proper DNS config — cold outreach at scale won\'t work. If they\'re missing this entirely, the fully managed solution removes all complexity. If partial, self-serve fills the gap.',
+    }
+  },
+
+  b2_check2: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Check 2 of 3: Can you find email contacts for smaller, niche publisher sites?',
+    type: 'question',
+    sub: 'Not just big publications — the specific, AI-cited sites that matter for citation share.',
+    choices: [
+      { label: 'Yes, we have that covered', next: 'b2_check3' },
+      { label: 'Partially — we struggle with smaller sites', next: 'outcome_selfserve' },
+      { label: 'No / Not sure', next: 'outcome_selfserve' }
+    ],
+    coaching: {
+      title: 'Check 2: Contact data',
+      body: 'Finding contacts for major publications is easy. Finding the right person at a niche, AI-cited site — a specialized industry blog, a research roundup, a vertical-specific resource — is where most internal teams break down. Offsite\'s self-serve agent solves this exactly.',
+    }
+  },
+
+  b2_check3: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Check 3 of 3: Can you write personalized outreach at scale and manage follow-up sequences?',
+    type: 'question',
+    choices: [
+      { label: 'Yes, we can do all of this', next: 'outcome_disqualify' },
+      { label: 'No / Partially — this is a gap', next: 'outcome_selfserve' }
+    ],
+    coaching: {
+      title: 'Check 3: Outreach execution',
+      body: 'If they pass all three checks, they have the full execution stack to run this themselves. Self-serve data and templates may still add speed and quality — but the urgency is lower. If they\'re missing outreach execution capability, self-serve fills that gap while they own the relationships.',
+    }
+  },
+
+  /* ── Outcomes ── */
+  outcome_b1a: {
+    section: 4,
+    pill: 'Outcome — Self-Serve',
+    question: 'Keep the agency. Add Offsite self-serve at $3K/mo.',
+    type: 'outcome',
+    details: [
+      'Offsite provides: citation data, target source lists, outreach templates + contacts',
+      'Agency executes the outreach using Offsite\'s targeting data',
+      'They get the missing layer (AI-cited sources) without changing their agency relationship'
+    ],
+    coaching: {
+      title: 'Why this works',
+      body: 'Their agency is already good at execution — they just don\'t have the right targets. Offsite fills that gap with citation data and Influence Score-ranked target lists. Position this as a force multiplier: same agency, better targeting, measurable citation lift. Timeline to set expectations: 30-45 days to initial placements, 60-90 days for measurable visibility lift.',
+      stat: { label: 'Timeline to set', text: '30-45 days to initial placements. 60-90 days for measurable AI visibility lift across ChatGPT, Claude, and Perplexity.' }
+    }
+  },
+
+  outcome_b1b: {
+    section: 4,
+    pill: 'Outcome — Fully Managed',
+    question: 'Replace the agency with Offsite fully managed at $5K/mo.',
+    type: 'outcome',
+    details: [
+      'End-to-end execution: domain infrastructure, outreach at scale, publisher negotiation',
+      'No agency dependency — Offsite owns the full motion',
+      'Better results: targeting AI-cited sources instead of just high-DA sites'
+    ],
+    coaching: {
+      title: 'Why this wins',
+      body: 'They\'re already paying for an agency that isn\'t hitting the mark. Offsite fully managed replaces that spend: better targeting (Influence Score vs DA), end-to-end execution, and measurement that closes the loop. Offsite replaces 5+ disparate tools — AI visibility tracking, content optimization, link-building, PR agencies, and attribution — in one managed service.',
+      stat: { label: 'Positioning line', text: '"Stop paying for DA metrics that don\'t move AI visibility. Offsite owns the full motion for $5K/mo — and you\'ll see initial placements in 30-45 days."' }
+    }
+  },
+
+  outcome_managed: {
+    section: 4,
+    pill: 'Outcome — Fully Managed',
+    question: 'Recommend Offsite fully managed at $5K/mo.',
+    type: 'outcome',
+    details: [
+      'No infrastructure setup required — Offsite handles everything',
+      'No outreach management — end-to-end execution included',
+      'No publisher negotiation — Offsite owns those relationships',
+      'Removes all complexity so the team can focus on other priorities'
+    ],
+    coaching: {
+      title: 'Position it as buying the outcome',
+      body: 'They want the result (AI Mentions, visibility) but don\'t have the execution stack to get there. Fully managed removes every barrier. Offsite replaces 5+ disparate tools — AI visibility tracking, link-building agencies, PR outreach, attribution — in one service. Don\'t sell them the work — sell them the outcome: "You\'ll see initial placements in 30-45 days. We own everything end to end."',
+      stat: { label: 'Timeline anchor', text: '30-45 days to initial placements. 60-90 days for measurable AI visibility lift. Use this to create a concrete picture of what success looks like.' }
+    }
+  },
+
+  outcome_selfserve: {
+    section: 4,
+    pill: 'Outcome — Self-Serve',
+    question: 'Recommend Offsite self-serve agent at $3K/mo.',
+    type: 'outcome',
+    details: [
+      'Provides: citation data, target source lists, outreach templates + email contacts',
+      'They execute the outreach using Offsite\'s data and targeting',
+      'Fills the specific gap (data, contacts, or templates) while they own execution'
+    ],
+    coaching: {
+      title: 'When self-serve is the right fit',
+      body: 'They have real execution capability but are missing inputs — citation data, the right contacts, outreach templates. Key: 85% of AI citations come from listicles, comparisons, and reviews — not the targets most teams would naturally find. Offsite\'s Influence Score surfaces these precision targets. Self-serve gives them the data; they own the execution.',
+      stat: { label: 'The precision advantage', text: 'Offsite\'s Influence Score (citation frequency + DA + content relevance) identifies the exact publisher targets most internal teams would never find on their own.' }
+    }
+  },
+
+  outcome_disqualify: {
+    section: 4,
+    pill: 'Assessment — Strong Internal',
+    question: 'This prospect has the full internal stack. Acknowledge it.',
+    type: 'outcome',
+    isDisqualify: true,
+    details: [
+      'Domain infrastructure: ✓ covered',
+      'Contact data at scale: ✓ covered',
+      'Outreach execution: ✓ covered',
+      'Consider: Offsite data may still add speed and quality — but the fit isn\'t urgent'
+    ],
+    coaching: {
+      title: 'How to handle a strong internal team',
+      body: 'Don\'t force a fit. Acknowledge their capability and consider whether the data quality or speed advantage is compelling enough to close now. If not, keep them warm — team changes, budget shifts, and scale challenges often create a re-entry point. The Citation Share data angle is still genuinely valuable even if they can execute independently.',
+    }
+  }
+};
+
+/* ─────────────────────────────────────────────────────────────────
+   App state
+───────────────────────────────────────────────────────────────── */
+let history = [];   // [{nodeId, choiceLabel}]
+let currentId = 'q1';
+let isFlipped = false;
+
+/* ─────────────────────────────────────────────────────────────────
+   Render
+───────────────────────────────────────────────────────────────── */
+function render() {
+  renderHistory();
+  renderActive();
+  renderProgress();
+  document.getElementById('restartBtn').style.display =
+    TREE[currentId].type === 'outcome' ? 'inline-flex' : 'none';
+}
+
+function renderProgress() {
+  const node = TREE[currentId];
+  const steps = document.querySelectorAll('.progress-step');
+  steps.forEach(s => {
+    const sec = parseInt(s.dataset.section);
+    s.classList.remove('active', 'done');
+    if (sec === node.section) s.classList.add('active');
+    else if (sec < node.section) s.classList.add('done');
+  });
+}
+
+function renderHistory() {
+  const el = document.getElementById('history');
+  el.innerHTML = history.map(item => {
+    const node = TREE[item.nodeId];
+    const q = node.type === 'educate' ? '[Coach note] ' + node.pill : node.question;
+    return `
+      <div class="history-card">
+        <div class="history-check">
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+            <path d="M1 4L3.5 6.5L9 1" stroke="#008c44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="history-q">${escHtml(q)}</div>
+          <div class="history-a">${escHtml(item.choiceLabel)}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderActive() {
+  const el = document.getElementById('activeCard');
+  const node = TREE[currentId];
+  isFlipped = false;
+
+  const pillClass = node.type === 'outcome'
+    ? (node.isDisqualify ? 'pill-green' : 'pill-dark')
+    : '';
+
+  /* Build front face */
+  let frontContent = '';
+
+  // Pill + meta (with inline back button)
+  const backBtn = history.length > 0
+    ? `<button class="card-back-btn" onclick="back()">← Back</button>`
+    : '';
+  frontContent += `<div class="card-meta"><span class="pill ${pillClass}">${escHtml(node.pill)}</span>${backBtn}</div>`;
+
+  // Question / headline
+  const cardClass = node.type === 'outcome'
+    ? 'card-front outcome-card'
+    : node.type === 'educate' ? 'card-front educate-card' : 'card-front';
+
+  frontContent += `<div class="card-question">${escHtml(node.question)}</div>`;
+
+  // Sub-text
+  if (node.sub) {
+    frontContent += `<div class="card-sub">${escHtml(node.sub)}</div>`;
+  }
+
+  // Body for educate nodes
+  if (node.type === 'educate' && node.body) {
+    frontContent += `<div class="card-sub" style="margin-top:8px;">${escHtml(node.body)}</div>`;
+  }
+
+  // Optional research link
+  if (node.link) {
+    frontContent += `<a href="${node.link.url}" target="_blank" rel="noopener" class="card-research-link">${escHtml(node.link.label)}</a>`;
+  }
+
+  // Outcome details
+  if (node.type === 'outcome' && node.details) {
+    frontContent += `<ul class="outcome-details">`;
+    node.details.forEach(d => {
+      frontContent += `<li>${escHtml(d)}</li>`;
+    });
+    frontContent += `</ul>`;
+  }
+
+  // Choices
+  if (node.choices && node.choices.length) {
+    frontContent += `<div class="card-choices">`;
+    node.choices.forEach((c, i) => {
+      const btnClass = (node.type === 'outcome' || (node.choices.length === 1 && node.type === 'educate'))
+        ? 'choice-btn accent'
+        : 'choice-btn';
+      frontContent += `<button class="${btnClass}" onclick="choose('${currentId}','${escAttr(c.next)}','${escAttr(c.label)}')">${escHtml(c.label)}</button>`;
+    });
+    frontContent += `</div>`;
+  }
+
+  // Flip button
+  if (node.coaching) {
+    frontContent += `<button class="flip-toggle" onclick="flipCard()">
+      Coaching context &nbsp;→
+    </button>`;
+  }
+
+  /* Build back face */
+  let backContent = '';
+  if (node.coaching) {
+    backContent += `<div class="coaching-eyebrow">Rep coaching</div>`;
+    backContent += `<div class="coaching-title">${escHtml(node.coaching.title)}</div>`;
+    backContent += `<div class="coaching-body">${escHtml(node.coaching.body)}</div>`;
+    if (node.coaching.stat) {
+      backContent += `<div class="coaching-stat"><strong>${escHtml(node.coaching.stat.label)}</strong><p>${escHtml(node.coaching.stat.text)}</p></div>`;
+    }
+    backContent += `<button class="flip-toggle" onclick="flipCard()">← Back to question</button>`;
+  }
+
+  el.innerHTML = `
+    <div class="active-card-wrapper slide-in">
+      <div class="flip-card" id="flipCard">
+        <div class="flip-face front">
+          <div class="${cardClass}">${frontContent}</div>
+        </div>
+        <div class="flip-face back">
+          <div class="card-back">${backContent}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Actions
+───────────────────────────────────────────────────────────────── */
+function choose(fromId, nextId, label) {
+  history.push({ nodeId: fromId, choiceLabel: label });
+  currentId = nextId;
+  render();
+  // Scroll to top of active card
+  setTimeout(() => {
+    const el = document.getElementById('activeCard');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 60);
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  const card = document.getElementById('flipCard');
+  if (card) {
+    card.classList.toggle('flipped', isFlipped);
+  }
+}
+
+function back() {
+  if (history.length === 0) return;
+  const prev = history.pop();
+  currentId = prev.nodeId;
+  isFlipped = false;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  history = [];
+  currentId = 'q1';
+  isFlipped = false;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Helpers
+───────────────────────────────────────────────────────────────── */
+function escHtml(str) {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function escAttr(str) {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Boot
+───────────────────────────────────────────────────────────────── */
+render();
+</script>
+</body>
+</html>
