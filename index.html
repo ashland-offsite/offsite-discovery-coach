@@ -464,6 +464,37 @@
     }
     .restart-btn:hover { color: var(--green-500); border-color: var(--green-500); }
 
+    /* Talking points list */
+    .talking-points {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .talking-points li {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 12px 14px;
+      background: var(--green-50);
+      border-left: 2px solid var(--green-500);
+    }
+    .tp-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-500);
+    }
+    .tp-body {
+      font-size: 14px;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
     /* Research link */
     .card-research-link {
       display: inline-flex;
@@ -775,12 +806,41 @@ const TREE = {
     type: 'educate',
     body: 'Most link-building agencies focus on link building for traditional search — which means targeting high DA sites. In the world of AI, DA isn\'t the North Star. LLMs pull from small to medium sized publishers — the long tail — and most of those sites don\'t even have a measurable DA. If the agency is only chasing high-DA placements, they\'re missing the majority of sources that actually drive AI mentions.',
     choices: [
-      { label: 'Understood — continue', next: 'b1_domain_infra' }
+      { label: 'Understood — continue', next: 'b1_cited_sites_pitch' }
     ],
     coaching: {
       title: 'The long-tail publisher gap',
       body: 'This is the single biggest gap most agencies have. High-DA targeting is the right instinct for Google — but LLMs don\'t work that way. They pull from thousands of niche, category-specific sites that happen to produce the content format (listicles, comparisons, reviews) that AI systems index heavily. Agencies without citation data simply don\'t know these sites exist.',
       stat: { label: 'Reframe to use', text: '"In AI search, a mid-DA comparison site that covers your category is worth more than a placement on Forbes. Your agency is probably not targeting those sites."' }
+    }
+  },
+
+  b1_cited_sites_pitch: {
+    section: 3,
+    pill: 'Talking Point — Agency',
+    question: 'Share this with the prospect: why highly cited sites and volume are the new game.',
+    type: 'educate',
+    body: 'Walk through these three points with the customer:',
+    points: [
+      {
+        label: 'DA is no longer the North Star',
+        body: 'Google ranks pages partly by Domain Authority. AI models don\'t. LLMs pull from sources that produce the right content format in the right category — listicles, comparisons, reviews — regardless of DA score. A niche comparison site with a DA of 30 can drive more AI mentions than a Forbes placement.'
+      },
+      {
+        label: 'The long tail is where AI lives',
+        body: 'Most AI citations come from small to mid-sized publishers — not the big publications your agency is probably targeting. These sites don\'t have huge followings, but LLMs index them heavily because they\'re category-specific and produce the content formats AI systems learn from. If your agency isn\'t targeting them, you\'re invisible to the sources that matter.'
+      },
+      {
+        label: 'This is a volume game',
+        body: 'One AI prompt pulls from ~65 sources. A single topic can generate 40-50 prompt variations. To move your mention rate meaningfully, you need placements on hundreds — potentially thousands — of publisher sites. That\'s a fundamentally different scale than traditional link building, which targets dozens.'
+      }
+    ],
+    choices: [
+      { label: 'Prospect understands — continue', next: 'b1_domain_infra' }
+    ],
+    coaching: {
+      title: 'How to land this with the customer',
+      body: 'The goal is a genuine "aha" moment — not a lecture. Lead with the DA reframe since it\'s the most counterintuitive. Most marketers have been trained to chase high-DA placements for years. Showing them that AI doesn\'t work that way is usually surprising. The volume stat closes it: once they do the math (65 citations × 40-50 prompts), they understand why their current approach won\'t move the needle.',
     }
   },
 
@@ -854,12 +914,41 @@ const TREE = {
     type: 'educate',
     body: 'Most internal link-building efforts focus on high DA sites for traditional search. In the world of AI, DA isn\'t the North Star. LLMs pull from small to medium sized publishers — the long tail — and most of those sites don\'t even have a measurable DA. If the team is only targeting high-DA publications, they\'re missing the majority of sources that actually drive AI mentions.',
     choices: [
-      { label: 'Understood — continue', next: 'b2_check1' }
+      { label: 'Understood — continue', next: 'b2_cited_sites_pitch' }
     ],
     coaching: {
       title: 'The long-tail gap for internal teams',
       body: 'Internal teams face the same targeting problem as agencies — but often with less resources to fix it. They don\'t have citation data, don\'t know which niche publishers LLMs actually cite, and are optimizing for a metric (DA) that doesn\'t predict AI visibility. Offsite\'s Influence Score gives them the target list they don\'t have — whether they execute via self-serve or fully managed.',
       stat: { label: 'Reframe to use', text: '"The sites that drive AI mentions are often ones you\'ve never heard of — small, category-specific publishers with no DA score. Your current process probably isn\'t finding them."' }
+    }
+  },
+
+  b2_cited_sites_pitch: {
+    section: 3,
+    pill: 'Talking Point — Internal',
+    question: 'Share this with the prospect: why highly cited sites and volume are the new game.',
+    type: 'educate',
+    body: 'Walk through these three points with the customer:',
+    points: [
+      {
+        label: 'DA is no longer the North Star',
+        body: 'Google ranks pages partly by Domain Authority. AI models don\'t. LLMs pull from sources that produce the right content format in the right category — listicles, comparisons, reviews — regardless of DA score. A niche comparison site with a DA of 30 can drive more AI mentions than a Forbes placement.'
+      },
+      {
+        label: 'The long tail is where AI lives',
+        body: 'Most AI citations come from small to mid-sized publishers — not the big publications your internal team is probably targeting. These sites don\'t have huge followings, but LLMs index them heavily because they\'re category-specific and produce the right content formats. If you aren\'t targeting them, you\'re invisible to the sources that matter most.'
+      },
+      {
+        label: 'This is a volume game',
+        body: 'One AI prompt pulls from ~65 sources. A single topic can generate 40-50 prompt variations. To move your mention rate meaningfully, you need placements on hundreds — potentially thousands — of publisher sites. That\'s a fundamentally different scale than most internal link-building programs, which target dozens of placements per year.'
+      }
+    ],
+    choices: [
+      { label: 'Prospect understands — continue', next: 'b2_check1' }
+    ],
+    coaching: {
+      title: 'How to land this with the customer',
+      body: 'Same delivery as the agency path — lead with the DA reframe, let the volume stat do the closing work. For internal teams, the volume point lands especially hard: most in-house programs do 10-20 link placements a month at best. When they realize they need hundreds to thousands of publisher mentions, it reframes the entire scope of the effort.',
     }
   },
 
@@ -1084,6 +1173,15 @@ function renderActive() {
   // Body for educate nodes
   if (node.type === 'educate' && node.body) {
     frontContent += `<div class="card-sub" style="margin-top:8px;">${escHtml(node.body)}</div>`;
+  }
+
+  // Talking points list (educate nodes with points array)
+  if (node.points) {
+    frontContent += `<ul class="talking-points">`;
+    node.points.forEach(p => {
+      frontContent += `<li><span class="tp-label">${escHtml(p.label)}</span><span class="tp-body">${escHtml(p.body)}</span></li>`;
+    });
+    frontContent += `</ul>`;
   }
 
   // Optional research link
