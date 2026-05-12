@@ -728,7 +728,7 @@ const TREE = {
     type: 'question',
     choices: [
       { label: 'Working with an agency', next: 'b1_links_question' },
-      { label: 'Handling it internally', next: 'b2_check1' }
+      { label: 'Handling it internally', next: 'b2_links_question' }
     ],
     coaching: {
       title: 'Why this splits the path',
@@ -744,7 +744,7 @@ const TREE = {
     type: 'question',
     choices: [
       { label: 'Work with an agency', next: 'b1_links_question' },
-      { label: 'Handle it internally', next: 'b2_check1' }
+      { label: 'Handle it internally', next: 'b2_links_question' }
     ],
     coaching: {
       title: 'Why this is the key fork',
@@ -832,20 +832,52 @@ const TREE = {
   },
 
   /* ── Path B2: Internal ── */
+  b2_links_question: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Ask the prospect: How many backlinks are you getting per month internally? What defines quality for you?',
+    type: 'educate',
+    body: 'Let them answer. You\'re listening for the same two signals as the agency path: volume (are they executing consistently?) and quality definition (are they chasing DA, or thinking about what actually drives AI visibility?). Most internal teams are either under-investing in volume or using DA as the only quality signal — both are openings.',
+    choices: [
+      { label: 'Got their answer — continue', next: 'b2_cited_sites' }
+    ],
+    coaching: {
+      title: 'What to listen for',
+      body: 'Internal teams often have less volume than agencies — and the same DA-centric quality definition. Low volume usually means they\'re doing link building manually and it\'s not a priority. "High DA" as a quality signal means they\'re optimizing for Google, not AI. Either answer sets up the cited-sites reframe on the next card.',
+    }
+  },
+
+  b2_cited_sites: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Do you know if you\'re reaching out to highly cited sites that AI is actually using as a source?',
+    type: 'educate',
+    body: 'Most internal link-building efforts focus on high DA sites for traditional search. In the world of AI, DA isn\'t the North Star. LLMs pull from small to medium sized publishers — the long tail — and most of those sites don\'t even have a measurable DA. If the team is only targeting high-DA publications, they\'re missing the majority of sources that actually drive AI mentions.',
+    choices: [
+      { label: 'Understood — continue', next: 'b2_check1' }
+    ],
+    coaching: {
+      title: 'The long-tail gap for internal teams',
+      body: 'Internal teams face the same targeting problem as agencies — but often with less resources to fix it. They don\'t have citation data, don\'t know which niche publishers LLMs actually cite, and are optimizing for a metric (DA) that doesn\'t predict AI visibility. Offsite\'s Influence Score gives them the target list they don\'t have — whether they execute via self-serve or fully managed.',
+      stat: { label: 'Reframe to use', text: '"The sites that drive AI mentions are often ones you\'ve never heard of — small, category-specific publishers with no DA score. Your current process probably isn\'t finding them."' }
+    }
+  },
+
   b2_check1: {
     section: 3,
     pill: 'Path B2 — Internal',
-    question: 'Check 1 of 3: Do you know how to spin up domain infrastructure for cold outreach?',
+    question: 'Check 1 of 3: Do you have the outbound infrastructure to run this internally at scale?',
     type: 'question',
-    sub: 'Separate sending domains, warming sequences, DMARC/SPF setup.',
+    sub: 'Setting up outbound infrastructure is genuinely hard — separate sending domains, domain warming, DMARC/SPF/DKIM config, and deliverability management. Most teams underestimate the setup time and ongoing maintenance.',
     choices: [
       { label: 'Yes, we can handle that', next: 'b2_check2' },
       { label: 'Partially — would need support', next: 'outcome_selfserve' },
       { label: 'No / Not sure', next: 'outcome_managed' }
     ],
     coaching: {
-      title: 'Check 1: Infrastructure',
-      body: 'Domain infrastructure is the foundation of scalable outreach. If they can\'t set this up — separate sending domains, warming sequences, proper DNS config — cold outreach at scale won\'t work. If they\'re missing this entirely, the fully managed solution removes all complexity. If partial, self-serve fills the gap.',
+      title: 'Why internal infra is harder than it looks',
+      body: 'Most teams think they can use their main company email domain for outreach — that\'s a fast path to getting the domain blacklisted. Proper outbound infrastructure means: buying and warming separate sending domains, configuring DNS records (DMARC, SPF, DKIM), managing sending limits, and monitoring deliverability across inboxes. It\'s 1-2 weeks of setup before a single email goes out — and it breaks if not maintained. If they don\'t have this already, fully managed removes all of it.',
+      stat: { label: 'The hidden cost', text: 'Outbound infra setup typically takes 1-2 weeks before any outreach can start. Ongoing deliverability management adds 2-4 hours/week. Most internal teams don\'t budget for this.' }
     }
   },
 
