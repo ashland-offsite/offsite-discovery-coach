@@ -490,9 +490,10 @@
       color: var(--green-500);
     }
     .tp-body {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-primary);
       line-height: 1.5;
+      font-weight: 500;
     }
 
     /* Research link */
@@ -824,15 +825,15 @@ const TREE = {
     points: [
       {
         label: 'DA is no longer the North Star',
-        body: 'Google ranks pages partly by Domain Authority. AI models don\'t. LLMs pull from sources that produce the right content format in the right category — listicles, comparisons, reviews — regardless of DA score. A niche comparison site with a DA of 30 can drive more AI mentions than a Forbes placement.'
+        body: 'AI models don\'t rank by DA. A niche comparison site with DA 30 can drive more AI mentions than Forbes.'
       },
       {
         label: 'The long tail is where AI lives',
-        body: 'Most AI citations come from small to mid-sized publishers — not the big publications your agency is probably targeting. These sites don\'t have huge followings, but LLMs index them heavily because they\'re category-specific and produce the content formats AI systems learn from. If your agency isn\'t targeting them, you\'re invisible to the sources that matter.'
+        body: 'LLMs pull from small, category-specific publishers — not the big publications your agency targets.'
       },
       {
         label: 'This is a volume game',
-        body: 'One AI prompt pulls from ~65 sources. A single topic can generate 40-50 prompt variations. To move your mention rate meaningfully, you need placements on hundreds — potentially thousands — of publisher sites. That\'s a fundamentally different scale than traditional link building, which targets dozens.'
+        body: '~65 citations per prompt × thousands of prompt variations = hundreds to thousands of placements needed.'
       }
     ],
     choices: [
@@ -840,7 +841,7 @@ const TREE = {
     ],
     coaching: {
       title: 'How to land this with the customer',
-      body: 'The goal is a genuine "aha" moment — not a lecture. Lead with the DA reframe since it\'s the most counterintuitive. Most marketers have been trained to chase high-DA placements for years. Showing them that AI doesn\'t work that way is usually surprising. The volume stat closes it: once they do the math (65 citations × 40-50 prompts), they understand why their current approach won\'t move the needle.',
+      body: 'The goal is a genuine "aha" moment — not a lecture. Lead with the DA reframe since it\'s the most counterintuitive. Most marketers have been trained to chase high-DA placements for years. Showing them that AI doesn\'t work that way is usually surprising. The volume stat closes it: once they do the math (65 citations × 40-50 prompts), they understand why their current approach won\'t move the needle. For the agency path specifically, the question is whether their current agency even knows which niche publishers LLMs cite — and the answer is almost always no. That\'s the gap Offsite fills.',
     }
   },
 
@@ -872,7 +873,7 @@ const TREE = {
     coaching: {
       title: 'Don\'t rip and replace unless invited',
       body: 'The agency gaps you just surfaced are real — but leading with "your agency is missing this" can backfire if the prospect loves their agency. Your job is to diagnose satisfaction, not create doubt. If they\'re happy: position Offsite as a layer on top. If they\'re frustrated or questioning results: that\'s your opening to position fully managed as a replacement. Wait for the door to open.',
-      stat: { label: 'The rule', text: 'Happy agency = Offsite as a force multiplier ($3K/mo). Unhappy agency = Offsite fully managed as a replacement ($5K/mo). Don\'t jump to replacement before you know which you\'re dealing with.' }
+      stat: { label: 'The rule', text: 'Happy agency = Offsite as a force multiplier ($2K/mo). Unhappy agency = Offsite fully managed as a replacement ($5K/mo). Don\'t jump to replacement before you know which you\'re dealing with.' }
     }
   },
 
@@ -887,7 +888,7 @@ const TREE = {
     ],
     coaching: {
       title: 'How satisfaction shapes the recommendation',
-      body: 'Happy agency customers: the agency can keep executing — Offsite adds the citation data layer they\'re missing ($3K/mo self-serve). Unhappy agency customers: this is your opening to replace them entirely with a fully managed solution ($5K/mo). Don\'t try to sell both simultaneously.',
+      body: 'Happy agency customers: the agency can keep executing — Offsite adds the citation data layer they\'re missing ($2K/mo self-serve). Unhappy agency customers: this is your opening to replace them entirely with a fully managed solution ($5K/mo). Don\'t try to sell both simultaneously.',
     }
   },
 
@@ -932,15 +933,15 @@ const TREE = {
     points: [
       {
         label: 'DA is no longer the North Star',
-        body: 'AI models don\'t rank sources by DA. A niche comparison site with DA 30 can drive more AI mentions than Forbes.'
+        body: 'AI models don\'t rank by DA. A niche comparison site with DA 30 can drive more AI mentions than Forbes.'
       },
       {
         label: 'The long tail is where AI lives',
-        body: 'LLMs pull heavily from small, category-specific publishers most teams have never heard of — not the big publications you\'re targeting.'
+        body: 'LLMs pull from small, category-specific publishers your team has probably never heard of.'
       },
       {
         label: 'This is a volume game',
-        body: '~65 citations per prompt × thousands of prompt variations = hundreds to thousands of publisher placements needed. Most internal programs target dozens per year.'
+        body: '~65 citations per prompt × thousands of prompt variations = hundreds to thousands of placements needed.'
       }
     ],
     choices: [
@@ -948,7 +949,7 @@ const TREE = {
     ],
     coaching: {
       title: 'How to land this with the customer',
-      body: 'Lead with the DA reframe — it\'s the most counterintuitive point for marketers who\'ve optimized for Google. The volume stat closes it: most in-house programs do 10-20 placements a month at best. When they do the math on what\'s actually needed, it reframes the entire scope of the effort and makes the case for external support.',
+      body: 'Lead with the DA reframe — it\'s the most counterintuitive point for marketers who\'ve optimized for Google. The volume stat closes it: most in-house programs do 10-20 placements a month at best. When they do the math on what\'s actually needed (hundreds to thousands of publisher placements), it reframes the entire scope of the effort and makes the case for external support. The key insight for internal teams: it\'s not just that they\'re doing fewer placements — it\'s that they\'re targeting the wrong sites entirely. Offsite\'s Influence Score tells them exactly which publishers matter for AI visibility.',
       stat: { label: 'The volume reality', text: 'Most internal link-building programs produce 10-20 placements/month. AI visibility at scale requires hundreds to thousands. The gap is too large to close manually.' }
     }
   },
@@ -1008,16 +1009,17 @@ const TREE = {
   outcome_b1a: {
     section: 4,
     pill: 'Outcome — Self-Serve',
-    question: 'Keep the agency. Add Offsite self-serve at $3K/mo.',
+    question: 'Keep the agency. Add Offsite self-serve at $2K/mo.',
     type: 'outcome',
     details: [
-      'Offsite provides: citation data, target source lists, outreach templates + contacts',
-      'Agency executes the outreach using Offsite\'s targeting data',
-      'They get the missing layer (AI-cited sources) without changing their agency relationship'
+      'Citation data + Influence Score-ranked target lists the agency can\'t find on their own',
+      'Personalized outreach emails at scale — each one written to the specific article, publication context, and where the brand fits in',
+      'Every email is on-brand and compliant: pulls from AirOps Brand Kit for tone, product info, case studies, and awards',
+      'Agency executes using Offsite\'s targeting and templates — no change to the agency relationship'
     ],
     coaching: {
       title: 'Why this works',
-      body: 'Their agency is already good at execution — they just don\'t have the right targets. Offsite fills that gap with citation data and Influence Score-ranked target lists. Position this as a force multiplier: same agency, better targeting, measurable citation lift. Timeline to set expectations: 30-45 days to initial placements, 60-90 days for measurable visibility lift.',
+      body: 'Their agency is good at execution — they just don\'t have the right targets or the right outreach. Offsite fills both gaps: Influence Score-ranked publisher lists the agency can\'t source, and personalized emails built from the brand\'s actual knowledge base. Position it as a force multiplier. Timeline: 30-45 days to initial placements, 60-90 days for measurable visibility lift.',
       stat: { label: 'Timeline to set', text: '30-45 days to initial placements. 60-90 days for measurable AI visibility lift across ChatGPT, Claude, and Perplexity.' }
     }
   },
@@ -1060,7 +1062,7 @@ const TREE = {
   outcome_selfserve: {
     section: 4,
     pill: 'Outcome — Self-Serve',
-    question: 'Recommend Offsite self-serve agent at $3K/mo.',
+    question: 'Recommend Offsite self-serve agent at $2K/mo.',
     type: 'outcome',
     details: [
       'Provides: citation data, target source lists, outreach templates + email contacts',
