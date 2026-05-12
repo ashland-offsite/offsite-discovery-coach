@@ -973,17 +973,18 @@ const TREE = {
   b2_check2: {
     section: 3,
     pill: 'Path B2 — Internal',
-    question: 'Check 2 of 3: Can you find email contacts for smaller, niche publisher sites?',
+    question: 'Check 2 of 3: Can you find contact information for thousands of small, niche publishers at scale?',
     type: 'question',
-    sub: 'Not just big publications — the specific, AI-cited sites that matter for citation share.',
+    sub: 'One prompt averages 65 citations. Across thousands of prompt variations, most brands need to reach thousands of publishers — the majority of which are small sites with no listed contact info.',
     choices: [
       { label: 'Yes, we have that covered', next: 'b2_check3' },
       { label: 'Partially — we struggle with smaller sites', next: 'outcome_selfserve' },
       { label: 'No / Not sure', next: 'outcome_selfserve' }
     ],
     coaching: {
-      title: 'Check 2: Contact data',
-      body: 'Finding contacts for major publications is easy. Finding the right person at a niche, AI-cited site — a specialized industry blog, a research roundup, a vertical-specific resource — is where most internal teams break down. Offsite\'s self-serve agent solves this exactly.',
+      title: 'Why contact data is the hardest part',
+      body: 'Finding the editor at TechCrunch is easy — they\'re everywhere. Finding the right contact at a niche, AI-cited industry blog with 3 contributors and no contact page is a completely different problem. Now multiply that by thousands of publishers. Most internal teams can find contacts for big publications — but the long-tail sites that actually drive AI mentions have no public contact info, no media kit, and no obvious outreach path. That\'s exactly what Offsite solves.',
+      stat: { label: 'The scale problem', text: '1 prompt = ~65 citations. Thousands of prompt variations = thousands of publishers to contact. Most are small sites where finding the right person takes 20-30 minutes of manual research — per site.' }
     }
   },
 
