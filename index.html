@@ -597,15 +597,6 @@
   <div class="progress-step active" data-section="1">
     <span class="step-dot"></span>AI visibility priority
   </div>
-  <div class="progress-step" data-section="2">
-    <span class="step-dot"></span>Link building status
-  </div>
-  <div class="progress-step" data-section="3">
-    <span class="step-dot"></span>Execution approach
-  </div>
-  <div class="progress-step" data-section="4">
-    <span class="step-dot"></span>Recommendation
-  </div>
 </div>
 
 <!-- ── Main content ──────────────────────────────────────── -->
@@ -1119,8 +1110,8 @@ function renderProgress() {
   steps.forEach(s => {
     const sec = parseInt(s.dataset.section);
     s.classList.remove('active', 'done');
-    if (sec === node.section) s.classList.add('active');
-    else if (sec < node.section) s.classList.add('done');
+    if (sec === 1 && node.section === 1) s.classList.add('active');
+    else if (sec === 1 && node.section > 1) s.classList.add('done');
   });
 }
 
