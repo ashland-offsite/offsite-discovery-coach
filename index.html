@@ -720,14 +720,18 @@ const TREE = {
     pill: 'Path A — High DA',
     question: 'You\'ve already won at link building. Time to reactivate that muscle for AI.',
     type: 'educate',
-    body: '"You stopped link building because you already won — high DA means Google trusts you. That\'s a real achievement. But DA doesn\'t get you into AI search results. LLMs don\'t rank by DA. They pull from whatever sources are most cited for your category — and those are often sites you\'ve never heard of. The good news: your team already knows the playbook. Mention building is link building, just pointed at a different target list. You\'re not starting from scratch — you\'re reactivating a strategy you\'ve already proven."',
+    points: [
+      { label: 'High DA = Google win', body: 'You\'ve already proven you can execute link building. That\'s a real advantage.' },
+      { label: 'DA doesn\'t move AI', body: 'LLMs don\'t rank by Domain Authority — they pull from the most-cited sources in your category.' },
+      { label: 'Same playbook, new target', body: 'Mention building is link building pointed at a different list. You\'re not starting over — you\'re reactivating.' }
+    ],
     choices: [
       { label: 'Prospect is following along — continue', next: 'q4_approach' }
     ],
     coaching: {
-      title: 'Connect with their SEO person',
-      body: 'High DA brands stopped link building because they hit their goal — not because they forgot how. That means there\'s likely an SEO lead or former link building practitioner on their team who knows exactly how this works. That person is your champion. The pitch to them: "This is the same motion you already know — identify target publishers, find the right contact, send a personalized pitch. The only difference is you\'re optimizing for Citation Share instead of DA." Framing it as reactivating a proven capability (not learning something new) removes the biggest objection: bandwidth.',
-      stat: { label: 'The reframe for SEO', text: '"Backlinking built your authority in Google. Mention building builds your authority in AI. Same skill set, new target list — and it\'s a channel your competitors haven\'t figured out yet."' }
+      title: 'Find their SEO person and make them your champion',
+      body: 'This prospect stopped link building because they won, not because they forgot how. Ask who owns SEO or who ran their link building program — that person is your internal champion. They already understand publisher outreach, contact finding, and pitch sequences. Your job is to reframe the ask: this isn\'t a new initiative, it\'s picking up a proven motion and pointing it at AI. Drop the bandwidth objection before it comes up by positioning it as reactivation, not a new project.',
+      stat: { label: 'Line to use with SEO', text: '"Backlinking built your authority in Google. Mention building builds your authority in AI. Same skill, new target list — and your competitors haven\'t figured this out yet."' }
     }
   },
 
