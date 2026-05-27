@@ -798,13 +798,193 @@ const TREE = {
     question: 'If you were to invest in mention building, would you handle it internally or work with an agency?',
     type: 'question',
     choices: [
-      { label: 'Work with an agency', next: 'b1_links_question' },
-      { label: 'Handle it internally', next: 'b2_links_question' }
+      { label: 'Work with an agency', next: 'b1h_links_question' },
+      { label: 'Handle it internally', next: 'b2h_links_question' }
     ],
     coaching: {
       eyebrow: 'Key decision point',
       title: 'Why this is the key fork',
       body: 'This question determines your product recommendation. Agency path leads to self-serve (data to feed the agency) or fully managed (replace the agency entirely). Internal path requires qualifying execution capability across three checks. Get a clear answer before moving on — "we might do both" is a non-answer.',
+    }
+  },
+
+  /* ── Hypothetical Path B1: Agency (from q4_approach — not doing link building) ── */
+  b1h_links_question: {
+    section: 3,
+    pill: 'Path B1 — Hypothetical Agency',
+    question: 'If your agency were to handle this, do you have any idea how they would identify highly cited sites?',
+    type: 'educate',
+    points: [
+      { label: 'Let them answer', body: 'Most won\'t know — and that\'s the point.' },
+      { label: 'Listen for confidence vs. uncertainty', body: '"We\'d figure it out" or "they do a lot of research" = they don\'t actually know.' },
+      { label: 'Their answer reveals the gap', body: 'Agencies without citation data default to DA targeting — the wrong metric for AI.' }
+    ],
+    choices: [
+      { label: 'Got their answer — continue', next: 'b1h_cited_sites' }
+    ],
+    coaching: {
+      eyebrow: 'Surfacing the gap',
+      title: 'Most won\'t have a good answer',
+      body: 'The goal of this question is to get them to say "I\'m not sure" or "I assume they\'d do some research." That opens the door to the next card. If they give a confident answer ("yes, our agency does citation analysis"), probe: what tool do they use? Most won\'t have a specific answer. Agencies without citation data default to DA targeting — the right instinct for Google, the wrong one for AI.',
+    }
+  },
+
+  b1h_cited_sites: {
+    section: 3,
+    pill: 'Path B1 — Hypothetical Agency',
+    question: 'How do you think an agency would know which publishers AI models actually cite — not just high-DA sites they usually target?',
+    type: 'educate',
+    points: [
+      { label: 'Agencies optimize for DA by default', body: 'Most link-building agencies don\'t have citation data — they can\'t identify which sites LLMs actually pull from.' },
+      { label: 'High-DA ≠ AI-cited', body: 'A Forbes placement won\'t necessarily move your AI mention rate. Niche, mid-DA publishers often outperform it.' },
+      { label: 'Without citation data, they\'re guessing', body: 'Offsite\'s Influence Score is the data layer that tells you exactly which publishers to target.' }
+    ],
+    choices: [
+      { label: 'Understood — continue', next: 'b1h_cited_sites_pitch' }
+    ],
+    coaching: {
+      eyebrow: 'The core gap to expose',
+      title: 'The data agencies don\'t have',
+      body: 'This is a data problem, not a capability problem. Agencies are smart and know how to run outreach — but without citation data they\'re targeting sites based on DA, traffic, or Google relevance, none of which predict AI visibility. Frame it as: "It\'s not that agencies can\'t do this — it\'s that they don\'t have the data to do it right." Offsite\'s Influence Score (citation frequency + domain authority + content relevance) is the targeting input they\'re missing.',
+      stat: { label: 'Reframe to use', text: '"In AI search, a mid-DA comparison site in your category is worth more than Forbes. An agency without citation data won\'t know to target it."' }
+    }
+  },
+
+  b1h_cited_sites_pitch: {
+    section: 3,
+    pill: 'Talking Point — Agency',
+    question: 'Share this with the prospect: why highly cited sites and volume are the new game.',
+    type: 'educate',
+    points: [
+      { label: 'DA is no longer the North Star', body: 'AI models don\'t rank by DA. A niche comparison site with DA 30 can drive more AI mentions than Forbes.' },
+      { label: 'The long tail is where AI lives', body: 'LLMs pull from small, category-specific publishers — not the big publications your agency targets.' },
+      { label: 'This is a volume game', body: '~65 citations per prompt × thousands of prompt variations = hundreds to thousands of placements needed.' }
+    ],
+    choices: [
+      { label: 'Prospect understands — continue', next: 'b1h_domain_infra' }
+    ],
+    coaching: {
+      eyebrow: 'Delivering the reframe',
+      title: 'How to land this with the customer',
+      body: 'Lead with the DA reframe — the most counterintuitive point for marketers trained to chase high-DA placements. The volume stat closes it: once they do the math (65 citations × 40-50 prompts), they understand why a traditional agency approach won\'t move the needle. The key question to plant: does any agency they\'d consider even know which niche publishers LLMs cite? Almost always no — that\'s the gap Offsite fills.',
+    }
+  },
+
+  b1h_domain_infra: {
+    section: 3,
+    pill: 'Path B1 — Hypothetical Agency',
+    question: 'Do you think an agency you\'d work with would have the infrastructure to send outreach to hundreds or thousands of publishers at scale?',
+    type: 'question',
+    choices: [
+      { label: 'They\'d want the agency to own full execution', next: 'outcome_b1b' },
+      { label: 'They\'d want to stay involved / oversee it', next: 'outcome_b1a' }
+    ],
+    coaching: {
+      eyebrow: 'The scale problem',
+      title: 'Most agencies aren\'t built for this volume',
+      body: 'Traditional link building agencies are manually intensive — they target specific high-value placements and negotiate them one by one. AI visibility requires a completely different operating model: high-volume outreach infrastructure, automated personalization, and publisher lists sourced from citation data. Use this card to help them see that whatever agency they\'d hire likely has the same gaps as what you\'ve just described — then route to the right outcome based on how much ownership they want.',
+      stat: { label: 'Scale stat', text: 'One prompt = ~65 citations. One topic = 40-50 prompts. Moving your mention rate meaningfully requires hundreds to thousands of placements — not the dozens most agencies deliver.' }
+    }
+  },
+
+  /* ── Hypothetical Path B2: Internal (from q4_approach — not doing link building) ── */
+  b2h_links_question: {
+    section: 3,
+    pill: 'Path B2 — Hypothetical Internal',
+    question: 'If you were to start doing this internally, how would you go about finding which publishers to target for AI mentions?',
+    type: 'educate',
+    points: [
+      { label: 'Let them answer', body: 'Don\'t fill the silence — you\'re diagnosing, not pitching.' },
+      { label: 'Listen for their instinct', body: '"Google search" or "Ahrefs" = they\'re thinking DA, not AI citations.' },
+      { label: 'Their answer reveals the gap', body: 'If they don\'t mention citation data, they\'re optimizing for the wrong metric.' }
+    ],
+    choices: [
+      { label: 'Got their answer — continue', next: 'b2h_cited_sites' }
+    ],
+    coaching: {
+      eyebrow: 'Surfacing the gap',
+      title: 'What their answer tells you',
+      body: 'Most internal teams default to SEO tools (Ahrefs, Semrush, Moz) when thinking about publisher targeting. Those tools are built for high-DA site discovery — not AI-cited publishers. If they name one of these tools, you have a direct opening: "Those are great for traditional link building — but for AI visibility the target list is completely different. That\'s what Offsite\'s Influence Score gives you." If they say "I\'m not sure," even better — they\'re already acknowledging the gap.',
+    }
+  },
+
+  b2h_cited_sites: {
+    section: 3,
+    pill: 'Path B2 — Hypothetical Internal',
+    question: 'Would your team know which sites AI models are actually citing — or would you default to targeting high-DA publications like most teams do?',
+    type: 'educate',
+    points: [
+      { label: 'Most teams default to DA targeting', body: 'It\'s the instinct from years of Google SEO — but LLMs don\'t rank sources by DA.' },
+      { label: 'AI cites the long tail', body: 'Small, category-specific publishers dominate AI citations — many with no measurable DA.' },
+      { label: 'Without citation data, you\'re targeting blind', body: 'Offsite\'s Influence Score tells your team exactly which publishers matter for AI visibility.' }
+    ],
+    choices: [
+      { label: 'Understood — continue', next: 'b2h_cited_sites_pitch' }
+    ],
+    coaching: {
+      eyebrow: 'The core gap to expose',
+      title: 'The long-tail gap for teams starting from scratch',
+      body: 'Teams starting fresh will naturally reach for tools and mental models they already have — DA, traffic, Google relevance. All of those are Google metrics. The LLM citation graph looks completely different: niche, category-specific, long-tail publishers that most teams have never heard of. The insight to land: you can\'t find these sites with a Google search or a standard SEO tool. That\'s not a skill gap — it\'s a data gap. And that\'s what Offsite provides.',
+      stat: { label: 'Reframe to use', text: '"The sites that drive AI mentions are ones you\'ve probably never heard of. Your current tools can\'t find them — that\'s not a skill gap, it\'s a data gap."' }
+    }
+  },
+
+  b2h_cited_sites_pitch: {
+    section: 3,
+    pill: 'Talking Point — Internal',
+    question: 'Share this with the prospect: why highly cited sites and volume are the new game.',
+    type: 'educate',
+    points: [
+      { label: 'DA is no longer the North Star', body: 'AI models don\'t rank by DA. A niche comparison site with DA 30 can drive more AI mentions than Forbes.' },
+      { label: 'The long tail is where AI lives', body: 'LLMs pull from small, category-specific publishers your team has probably never heard of.' },
+      { label: 'This is a volume game', body: '~65 citations per prompt × thousands of prompt variations = hundreds to thousands of placements needed.' }
+    ],
+    choices: [
+      { label: 'Prospect understands — continue', next: 'b2h_check_contacts' }
+    ],
+    coaching: {
+      eyebrow: 'Delivering the reframe',
+      title: 'How to land this with the customer',
+      body: 'Lead with the DA reframe — most counterintuitive for marketers who\'ve optimized for Google. The volume stat closes it: when they do the math on what\'s actually needed (hundreds to thousands of placements) vs. what a typical internal program could realistically produce, starting this from scratch internally becomes a much bigger lift than they imagined.',
+      stat: { label: 'The volume reality', text: 'Most internal link-building programs produce 10-20 placements/month. AI visibility at scale requires hundreds to thousands. Starting from zero makes that gap even larger.' }
+    }
+  },
+
+  b2h_check_contacts: {
+    section: 3,
+    pill: 'Path B2 — Hypothetical Internal',
+    question: 'Check 1 of 2: Would your team have a way to find contact info for thousands of small, niche publishers — most of which have no listed contact page?',
+    type: 'question',
+    sub: 'One prompt averages 65 citations. Across thousands of prompt variations, most brands need to reach thousands of publishers — the majority of which are small sites with no public contact info.',
+    choices: [
+      { label: 'Yes, we could handle that', next: 'b2h_check_execution' },
+      { label: 'Partially — we\'d struggle with smaller sites', next: 'outcome_selfserve' },
+      { label: 'No / Not sure', next: 'outcome_selfserve' }
+    ],
+    coaching: {
+      eyebrow: 'Qualification check 1 of 2',
+      title: 'Why contact data is the hardest part',
+      body: 'Finding the editor at TechCrunch is easy. Finding the right contact at a niche AI-cited industry blog with 3 contributors and no contact page is a completely different problem — and you need to do it at scale. Most internal teams can handle big publications but the long-tail sites that actually drive AI mentions have no public contact info, no media kit, and no obvious outreach path. That\'s exactly what Offsite solves.',
+      stat: { label: 'The scale problem', text: '1 prompt = ~65 citations. Thousands of prompt variations = thousands of publishers to contact. Most are small sites where finding the right person takes 20-30 minutes of manual research — per site.' }
+    }
+  },
+
+  b2h_check_execution: {
+    section: 3,
+    pill: 'Path B2 — Hypothetical Internal',
+    question: 'Check 2 of 2: Would your team have the time or knowledge to set up dedicated outbound infrastructure AND write personalized outreach at scale?',
+    type: 'question',
+    sub: 'Outbound infrastructure means separate sending domains, warming sequences, and DMARC/SPF/DKIM config — needed before a single email goes out. Personalized outreach means emails tailored to each publisher\'s specific content and context.',
+    choices: [
+      { label: 'Yes, we could handle all of this', next: 'outcome_disqualify' },
+      { label: 'Partially — some gaps here', next: 'outcome_selfserve' },
+      { label: 'No / Not sure', next: 'outcome_managed' }
+    ],
+    coaching: {
+      eyebrow: 'Qualification check 2 of 2',
+      title: 'Two gaps, one question',
+      body: 'This card combines the two hardest execution gaps: outbound infrastructure and personalized outreach at scale. Infrastructure is the technical prerequisite — most teams underestimate it (separate domains, DNS config, deliverability management, 1-2 weeks setup before a single email goes out). Personalized outreach is the volume problem: Offsite writes emails tailored to each article, publication context, and where the brand fits in — pulling from the brand\'s own knowledge base and Brand Kit. Doing this manually for hundreds of publishers isn\'t realistic.',
+      stat: { label: 'The hidden cost', text: 'Outbound infra setup: 1-2 weeks before any outreach can start. Personalized outreach at scale: Offsite automates this using the brand\'s own tone guidelines, product info, case studies, and awards.' }
     }
   },
 
