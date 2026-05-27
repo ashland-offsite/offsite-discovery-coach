@@ -640,7 +640,11 @@ const TREE = {
     pill: '85% stat — AI Visibility',
     question: '85% of AI visibility is won offsite — not on your own domain.',
     type: 'educate',
-    body: '85% of AI visibility comes from third-party sources — listicles, comparison guides, review sites, niche publications. Not your blog, not your homepage. If a prospect wants to show up when buyers ask an AI "what\'s the best tool for X," they need to be mentioned on the sources those AI models actually pull from. That\'s the Offsite opportunity. That said, owned content still matters — it provides the substance that third-party sources cite and validate. Onsite and Offsite reinforce each other: owned content gives AI systems something credible to reference, earned coverage extends that narrative into discovery.',
+    points: [
+      { label: 'Not your blog or homepage', body: '85% comes from third-party sources: listicles, comparison guides, review sites, niche publications.' },
+      { label: 'AI pulls from what others say', body: 'To show up in AI answers, you need mentions on the sources those models actually cite.' },
+      { label: 'Onsite still matters', body: 'Owned content gives AI something credible to reference. Offsite extends that narrative into discovery.' }
+    ],
     link: { label: 'Read the research report →', url: 'https://www.airops.com/report/the-influence-of-offsite-signals-in-ai-search' },
     choices: [
       { label: 'Ask the prospect: Does this surprise you? — then continue', next: 'q1_product_overview' }
@@ -648,7 +652,7 @@ const TREE = {
     coaching: {
       eyebrow: 'Opening move',
       title: 'Why open here',
-      body: 'AirOps research found that brands are 6.5x more likely to be cited through third-party sources than their own domains. Your website is almost irrelevant to AI visibility — what matters is what others say about you. This single insight sets up the entire Offsite value prop. If they\'re already bought in, move fast. If not, you have a reframe to make first.',
+      body: 'AirOps research found that brands are 6.5x more likely to be cited through third-party sources than their own domains. Your website is almost irrelevant to AI visibility — what matters is what others say about you. This single insight sets up the entire Offsite value prop. If they\'re already bought in, move fast. If not, you have a reframe to make first. Note: Onsite and Offsite reinforce each other — owned content gives AI systems something credible to reference, and earned coverage extends that narrative into discovery. Don\'t let them think it\'s either/or.',
       stat: { label: 'Lead with this', text: 'Brands are 6.5x more likely to be cited through third-party sources than their own domains. 85% of AI visibility comes from external sites — not your own content.' }
     }
   },
@@ -658,14 +662,18 @@ const TREE = {
     pill: '60-second pitch — Offsite',
     question: 'Give a brief verbal overview of Offsite. No slides needed.',
     type: 'educate',
-    body: '"Offsite is a new offering at AirOps that expands beyond Onsite — things like refreshing and creating blogs on your site. Offsite encompasses everything off your website: Reddit, LinkedIn, X, YouTube, media sites, niche blogs and third-party publishers, community forums, affiliates, marketplaces, and more. AirOps offers multiple Agent offerings within Offsite, and I can help figure out which is the best fit for you. I typically recommend starting with our Mention Building Agent — it helps reach out to third-party publishers to drive mentions. Think of it like link building, but for the world of AI."',
+    points: [
+      { label: 'Onsite vs. Offsite', body: 'Onsite = your blog, your domain. Offsite = everything else: Reddit, LinkedIn, YouTube, media sites, niche publishers, and more.' },
+      { label: 'Multiple agent offerings', body: 'Start with Mention Building Agent — it reaches out to third-party publishers to drive mentions.' },
+      { label: 'Think of it as link building for AI', body: 'Same motion, but targeting the sources AI models actually cite.' }
+    ],
     choices: [
       { label: 'Overview delivered — continue to discovery', next: 'q2' }
     ],
     coaching: {
       eyebrow: 'Pitch delivery tips',
       title: 'Tips for delivering this pitch',
-      body: 'Keep it conversational — this is a setup, not a close. The goal is to give them enough context so the discovery questions that follow make sense. Lead with the contrast: Onsite vs. Offsite. Name-drop the channels they\'ll recognize (Reddit, LinkedIn, YouTube) to make it concrete fast. End on Mention Building as the entry point — it frames the rest of the conversation around a specific, familiar motion (link building) rather than an abstract new category.',
+      body: 'Keep it conversational — this is a setup, not a close. The goal is to give them enough context so the discovery questions that follow make sense. Lead with the Onsite vs. Offsite contrast. Name-drop channels they\'ll recognize (Reddit, LinkedIn, YouTube) to make it concrete fast. End on Mention Building as the entry point — it frames the rest of the call around a familiar motion rather than an abstract new category. Full script if you want it: "Offsite is a new offering at AirOps that expands beyond Onsite — things like refreshing and creating blogs on your site. Offsite encompasses everything off your website: Reddit, LinkedIn, X, YouTube, media sites, niche blogs and third-party publishers, community forums, affiliates, marketplaces, and more. I typically recommend starting with our Mention Building Agent — it helps reach out to third-party publishers to drive mentions. Think of it like link building, but for the world of AI."',
       stat: { label: 'The one-line version', text: '"It\'s link building — but targeting the sources AI models actually cite instead of just high-DA sites."' }
     }
   },
@@ -675,14 +683,18 @@ const TREE = {
     pill: 'Section 1 — Objection Handling',
     question: 'Handle the objection, then align before proceeding.',
     type: 'educate',
-    body: 'AI search is taking share from traditional search every month. Brands not investing now are falling behind — and the gap compounds over time. Position this as a forward-looking channel investment, not a replacement for what\'s working. Once the prospect is aligned on the risk of inaction, continue.',
+    points: [
+      { label: 'AI is taking share now', body: 'AI search is growing every month — brands not investing are already falling behind.' },
+      { label: 'The gap compounds', body: 'The longer they wait, the harder it is to catch up. Early movers build durable visibility.' },
+      { label: 'Not a replacement', body: 'Frame it as a forward-looking channel investment, not a replacement for what\'s already working.' }
+    ],
     choices: [
       { label: 'Prospect is aligned — continue', next: 'q2' }
     ],
     coaching: {
       eyebrow: 'Objection handling',
       title: 'How to frame the risk of inaction',
-      body: '"The brands winning in AI search right now are building moats. Waiting isn\'t neutral — it\'s falling behind." Use forward-looking framing. A key insight: 68% of brand mentions appear in only ONE AI platform — meaning even brands with some visibility are inconsistent across ChatGPT, Claude, and Perplexity. That gap compounds over time.',
+      body: 'Your go-to line: "The brands winning in AI search right now are building moats. Waiting isn\'t neutral — it\'s falling behind." Use forward-looking framing — never position this as replacing what\'s working. The urgency stat that lands hardest: 68% of brand mentions appear in only ONE AI platform, meaning even brands with some AI visibility are inconsistent. That cross-platform gap compounds over time and is much harder to close retroactively.',
       stat: { label: 'Urgency stat', text: '68% of brand mentions appear in only one AI platform. Cross-platform consistency requires active investment — it doesn\'t happen on its own.' }
     }
   },
@@ -747,14 +759,18 @@ const TREE = {
     pill: 'Path A — Low DA',
     question: 'Educate on the split strategy.',
     type: 'educate',
-    body: 'SEO is still foundational — they can\'t skip link building. But winning brands invest in both: traditional search (Google) and AI search (LLMs). Recommend a split: ~50% traditional link building, ~50% mention building. Mention building helps SEO, but alone won\'t build enough DA early on. Frame it as covering both bases from day one.',
+    points: [
+      { label: 'SEO is still foundational', body: 'Don\'t skip link building — DA matters for Google and builds credibility.' },
+      { label: 'Winning brands do both', body: 'Recommend ~50% traditional link building for DA + ~50% mention building for AI.' },
+      { label: 'Mention building alone isn\'t enough early on', body: 'Without DA, there\'s no foundation for AI or Google to build on. Cover both from day one.' }
+    ],
     choices: [
       { label: 'Prospect understands the split strategy — continue', next: 'q4_approach' }
     ],
     coaching: {
       eyebrow: 'Dual-channel strategy',
       title: 'Why the split strategy is the right call',
-      body: 'The dual investment covers both bases: domain authority for Google, citation share for AI. This is actually the strongest position for a brand building from scratch — they don\'t have to choose. And Offsite\'s mention building has a secondary SEO benefit. Important: the content types that earn AI citations are very specific — listicles, comparisons, reviews — so they can\'t assume traditional link building will accidentally cover this.',
+      body: 'This is actually the strongest position for a brand building from scratch — they don\'t have to choose between Google and AI. The dual investment covers both bases: domain authority for Google, citation share for AI. Important nuance: mention building has a secondary SEO benefit, but it won\'t build DA on its own. The content types that earn AI citations are very specific (listicles, comparisons, reviews) — they can\'t assume traditional link building will accidentally cover them. Be explicit about the split so they budget for both.',
       stat: { label: 'Recommended split', text: '~50% traditional link building (for DA) + ~50% mention building targeting listicles, comparisons, and review content where 85% of AI citations originate.' }
     }
   },
@@ -798,14 +814,18 @@ const TREE = {
     pill: 'Path B1 — Agency',
     question: 'Ask the prospect: How many links is your agency getting per month? What defines quality for you?',
     type: 'educate',
-    body: 'Let them answer. You\'re listening for two things: volume (are they actually getting consistent placements?) and how they define quality (DA score? traffic? relevance?). Most prospects will say something like "high DA sites" or "authoritative publications" — that\'s your opening for the next question.',
+    points: [
+      { label: 'Let them answer', body: 'Don\'t fill the silence — you\'re listening, not pitching.' },
+      { label: 'Listen for volume', body: 'Are they getting consistent placements, or is it sporadic?' },
+      { label: 'Listen for quality definition', body: '"High DA sites" or "authoritative publications" = your opening for the next card.' }
+    ],
     choices: [
       { label: 'Got their answer — continue', next: 'b1_cited_sites' }
     ],
     coaching: {
       eyebrow: 'Active listening cues',
       title: 'What to listen for',
-      body: 'Volume and quality definition are your diagnostic signals. Low volume means the agency isn\'t executing at scale. "High DA" as a quality signal means they\'re optimizing for traditional search — not AI. Either answer sets up the reframes on the next two cards.',
+      body: 'Volume and quality definition are your two diagnostic signals. Low volume means the agency isn\'t executing at scale — that\'s a gap Offsite fixes. "High DA" as a quality definition means they\'re optimizing for traditional search, not AI — that\'s your setup for the cited sites reframe on the next card. Either answer is an opening. If they give you both problems, even better.',
     }
   },
 
@@ -814,7 +834,11 @@ const TREE = {
     pill: 'Path B1 — Agency',
     question: 'Do you know if your agency is reaching out to highly cited sites?',
     type: 'educate',
-    body: 'Most link-building agencies focus on link building for traditional search — which means targeting high DA sites. In the world of AI, DA isn\'t the North Star. LLMs pull from small to medium sized publishers — the long tail — and most of those sites don\'t even have a measurable DA. If the agency is only chasing high-DA placements, they\'re missing the majority of sources that actually drive AI mentions.',
+    points: [
+      { label: 'Agencies optimize for DA', body: 'Most link-building agencies target high DA sites — that\'s the right call for Google, not AI.' },
+      { label: 'DA isn\'t the North Star for LLMs', body: 'LLMs pull from small to mid-sized publishers, many with no measurable DA.' },
+      { label: 'They\'re likely missing the sources that matter', body: 'If the agency is only chasing high-DA placements, they\'re skipping most of what drives AI mentions.' }
+    ],
     choices: [
       { label: 'Understood — continue', next: 'b1_cited_sites_pitch' }
     ],
@@ -831,7 +855,6 @@ const TREE = {
     pill: 'Talking Point — Agency',
     question: 'Share this with the prospect: why highly cited sites and volume are the new game.',
     type: 'educate',
-    body: 'Walk through these three points with the customer:',
     points: [
       {
         label: 'DA is no longer the North Star',
@@ -861,7 +884,11 @@ const TREE = {
     pill: 'Path B1 — Agency',
     question: 'Does your agency know how to send high-volume outreach and set up domain infrastructure at scale?',
     type: 'educate',
-    body: 'On average, one AI prompt has 65 citations — and a single prompt topic can have 40 to 50 variations. To meaningfully move your AI mention rate, you likely need placements on hundreds or even thousands of publisher sites. That requires serious outreach infrastructure: dedicated sending domains, warming sequences, personalization at scale. Most traditional link-building agencies aren\'t built for this volume.',
+    points: [
+      { label: 'The math is bigger than it looks', body: '~65 citations per prompt × 40-50 topic variations = hundreds to thousands of placements needed.' },
+      { label: 'This requires real infrastructure', body: 'Dedicated sending domains, warming sequences, and personalization at scale — not a standard agency setup.' },
+      { label: 'Most link-building agencies aren\'t built for this', body: 'Traditional agencies optimize for dozens of placements. AI visibility requires a fundamentally different scale.' }
+    ],
     choices: [
       { label: 'Got it — continue to agency diagnosis', next: 'b1_diagnosis' }
     ],
@@ -878,7 +905,11 @@ const TREE = {
     pill: 'Path B1 — Agency',
     question: 'Diagnose their agency relationship.',
     type: 'educate',
-    body: 'You\'ve surfaced the gaps — now read the room. The goal here is NOT to give the agency a vote of no confidence. If they\'re happy with the relationship, you don\'t want to rip and replace. You need to see if they crack open a door first. Listen for frustration, unmet expectations, or openness to change before positioning Offsite as a replacement. If the door is closed, position Offsite as an add-on.',
+    points: [
+      { label: 'Read the room first', body: 'You\'ve surfaced the gaps — don\'t immediately pitch against the agency.' },
+      { label: 'Listen for frustration or openness', body: 'Unmet expectations, missed targets, or curiosity about switching are all green lights.' },
+      { label: 'If the door is closed, add on', body: 'Happy with agency → Offsite as a layer. Frustrated → position as a replacement.' }
+    ],
     choices: [
       { label: 'Diagnosed — continue to satisfaction check', next: 'b1_satisfaction' }
     ],
@@ -912,14 +943,18 @@ const TREE = {
     pill: 'Path B2 — Internal',
     question: 'Ask the prospect: How many backlinks are you getting per month internally? What defines quality for you?',
     type: 'educate',
-    body: 'Let them answer. You\'re listening for the same two signals as the agency path: volume (are they executing consistently?) and quality definition (are they chasing DA, or thinking about what actually drives AI visibility?). Most internal teams are either under-investing in volume or using DA as the only quality signal — both are openings.',
+    points: [
+      { label: 'Let them answer', body: 'Don\'t fill the silence — you\'re diagnosing, not pitching.' },
+      { label: 'Listen for volume', body: 'Low volume = not a priority, or doing it manually. Both are openings.' },
+      { label: 'Listen for quality definition', body: 'DA-only thinking = they\'re optimizing for Google, not AI. That\'s your setup for the next card.' }
+    ],
     choices: [
       { label: 'Got their answer — continue', next: 'b2_cited_sites' }
     ],
     coaching: {
       eyebrow: 'Active listening cues',
       title: 'What to listen for',
-      body: 'Internal teams often have less volume than agencies — and the same DA-centric quality definition. Low volume usually means they\'re doing link building manually and it\'s not a priority. "High DA" as a quality signal means they\'re optimizing for Google, not AI. Either answer sets up the cited-sites reframe on the next card.',
+      body: 'Internal teams often have less volume than agencies and the same DA-centric quality definition. Low volume usually means link building is manual and under-resourced — that\'s a signal the team can\'t scale this without help. "High DA" as a quality signal means they\'re optimizing for Google, not AI. Either answer sets up the cited-sites reframe on the next card. If you get both signals — low volume AND DA-focused — you have a strong case for fully managed.',
     }
   },
 
@@ -928,7 +963,11 @@ const TREE = {
     pill: 'Path B2 — Internal',
     question: 'Do you know if you\'re reaching out to highly cited sites that AI is actually using as a source?',
     type: 'educate',
-    body: 'Most internal link-building efforts focus on high DA sites for traditional search. In the world of AI, DA isn\'t the North Star. LLMs pull from small to medium sized publishers — the long tail — and most of those sites don\'t even have a measurable DA. If the team is only targeting high-DA publications, they\'re missing the majority of sources that actually drive AI mentions.',
+    points: [
+      { label: 'Internal teams target high DA sites', body: 'Right for Google — but LLMs don\'t rank by DA.' },
+      { label: 'LLMs pull from the long tail', body: 'Small to mid-sized publishers, many with no measurable DA, dominate AI citations.' },
+      { label: 'High-DA-only = missing most of what matters', body: 'If they\'re only targeting well-known publications, they\'re skipping the sites that actually drive AI mentions.' }
+    ],
     choices: [
       { label: 'Understood — continue', next: 'b2_cited_sites_pitch' }
     ],
@@ -945,7 +984,6 @@ const TREE = {
     pill: 'Talking Point — Internal',
     question: 'Share this with the prospect: why highly cited sites and volume are the new game.',
     type: 'educate',
-    body: 'Three things to land with the customer:',
     points: [
       {
         label: 'DA is no longer the North Star',
