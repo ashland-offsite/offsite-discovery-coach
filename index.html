@@ -958,8 +958,8 @@ const OFFSITE_TREE = {
     sub: 'One prompt averages 65 citations. Across thousands of prompt variations, most brands need to reach thousands of publishers — the majority of which are small sites with no public contact info.',
     choices: [
       { label: 'Yes, we could handle that', next: 'b2h_check_execution' },
-      { label: 'Partially — we\'d struggle with smaller sites', next: 'outcome_selfserve' },
-      { label: 'No / Not sure', next: 'outcome_selfserve' }
+      { label: 'Partially — we\'d struggle with smaller sites', next: 'outcome_managed' },
+      { label: 'No / Not sure', next: 'outcome_managed' }
     ],
     coaching: {
       eyebrow: 'Qualification check 1 of 2',
@@ -977,7 +977,7 @@ const OFFSITE_TREE = {
     sub: 'Outbound infrastructure means separate sending domains, warming sequences, and DMARC/SPF/DKIM config — needed before a single email goes out. Personalized outreach means emails tailored to each publisher\'s specific content and context.',
     choices: [
       { label: 'Yes, we could handle all of this', next: 'outcome_disqualify' },
-      { label: 'Partially — some gaps here', next: 'outcome_selfserve' },
+      { label: 'Partially — some gaps here', next: 'outcome_managed' },
       { label: 'No / Not sure', next: 'outcome_managed' }
     ],
     coaching: {
@@ -1197,7 +1197,7 @@ const OFFSITE_TREE = {
     sub: 'Setting up outbound infrastructure is genuinely hard — separate sending domains, domain warming, DMARC/SPF/DKIM config, and deliverability management. Most teams underestimate the setup time and ongoing maintenance.',
     choices: [
       { label: 'Yes, we can handle that', next: 'b2_check2' },
-      { label: 'Partially — would need support', next: 'outcome_selfserve' },
+      { label: 'Partially — would need support', next: 'outcome_managed' },
       { label: 'No / Not sure', next: 'outcome_managed' }
     ],
     coaching: {
@@ -1216,7 +1216,7 @@ const OFFSITE_TREE = {
     sub: 'One prompt averages 65 citations. Across thousands of prompt variations, most brands need to reach thousands of publishers — the majority of which are small sites with no listed contact info.',
     choices: [
       { label: 'Yes, we have that covered', next: 'b2_check3' },
-      { label: 'Partially — we struggle with smaller sites', next: 'outcome_selfserve' },
+      { label: 'Partially — we struggle with smaller sites', next: 'outcome_managed' },
       { label: 'No / Not sure', next: 'outcome_selfserve' }
     ],
     coaching: {
@@ -1234,7 +1234,7 @@ const OFFSITE_TREE = {
     type: 'question',
     choices: [
       { label: 'Yes, we can do all of this', next: 'outcome_disqualify' },
-      { label: 'No / Partially — this is a gap', next: 'outcome_selfserve' }
+      { label: 'No / Partially — this is a gap', next: 'outcome_managed' }
     ],
     coaching: {
       eyebrow: 'Qualification check 3 of 3',
