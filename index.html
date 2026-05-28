@@ -594,10 +594,10 @@
 
 <!-- ── Progress bar ──────────────────────────────────────── -->
 <div class="progress-bar-wrapper" id="progressBar">
-  <div class="progress-step active" data-section="1">
+  <div class="progress-step active" data-tab="offsite" onclick="switchTab('offsite')" style="cursor:pointer;">
     <span class="step-dot"></span>Offsite Discovery
   </div>
-  <div class="progress-step" data-section="onsite">
+  <div class="progress-step" data-tab="onsite" onclick="switchTab('onsite')" style="cursor:pointer;">
     <span class="step-dot"></span>Onsite Discovery
   </div>
 </div>
@@ -615,7 +615,7 @@
 /* ─────────────────────────────────────────────────────────────────
    Decision tree data
 ───────────────────────────────────────────────────────────────── */
-const TREE = {
+const OFFSITE_TREE = {
 
   /* ── Section 1: AI Visibility Priority ── */
   q1: {
@@ -1338,12 +1338,41 @@ const TREE = {
   }
 };
 
+/* Deep clone Offsite tree as the starting point for Onsite */
+const ONSITE_TREE = JSON.parse(JSON.stringify(OFFSITE_TREE));
+let TREE = OFFSITE_TREE;
+
 /* ─────────────────────────────────────────────────────────────────
    App state
 ───────────────────────────────────────────────────────────────── */
+const tabStates = {
+  offsite: { currentId: 'q1', history: [] },
+  onsite:  { currentId: 'q1', history: [] }
+};
+let activeTab = 'offsite';
+
 let history = [];   // [{nodeId, choiceLabel}]
 let currentId = 'q1';
 let isFlipped = false;
+
+function switchTab(tab) {
+  if (tab === activeTab) return;
+  // Save current tab state
+  tabStates[activeTab] = { currentId, history: [...history] };
+  // Restore new tab state
+  activeTab = tab;
+  TREE = tab === 'offsite' ? OFFSITE_TREE : ONSITE_TREE;
+  currentId = tabStates[tab].currentId;
+  history = [...tabStates[tab].history];
+  isFlipped = false;
+  // Update tab UI
+  document.querySelectorAll('.progress-step').forEach(s => {
+    s.classList.toggle('active', s.dataset.tab === tab);
+    s.classList.remove('done');
+  });
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 /* ─────────────────────────────────────────────────────────────────
    Render
@@ -1357,13 +1386,9 @@ function render() {
 }
 
 function renderProgress() {
-  const node = TREE[currentId];
-  const steps = document.querySelectorAll('.progress-step');
-  steps.forEach(s => {
-    const sec = parseInt(s.dataset.section);
-    s.classList.remove('active', 'done');
-    if (sec === 1 && node.section === 1) s.classList.add('active');
-    else if (sec === 1 && node.section > 1) s.classList.add('done');
+  document.querySelectorAll('.progress-step').forEach(s => {
+    s.classList.toggle('active', s.dataset.tab === activeTab);
+    s.classList.remove('done');
   });
 }
 
