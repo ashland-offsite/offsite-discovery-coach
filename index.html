@@ -1325,7 +1325,15 @@ const OFFSITE_TREE = {
 };
 
 /* Deep clone Offsite tree as the starting point for Onsite */
-const ONSITE_TREE = JSON.parse(JSON.stringify(OFFSITE_TREE));
+const ONSITE_TREE = {
+  q1: {
+    section: 1,
+    pill: 'Onsite Discovery',
+    question: 'Onsite discovery cards coming soon.',
+    type: 'question',
+    choices: []
+  }
+};
 let TREE = OFFSITE_TREE;
 
 /* ─────────────────────────────────────────────────────────────────
