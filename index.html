@@ -1326,13 +1326,67 @@ const OFFSITE_TREE = {
 
 /* Deep clone Offsite tree as the starting point for Onsite */
 const ONSITE_TREE = {
+
   q1: {
     section: 1,
     pill: 'Onsite Discovery',
-    question: 'Onsite discovery cards coming soon.',
+    question: 'What made you want to chat today?',
     type: 'question',
-    choices: []
+    choices: [
+      { label: 'Organic metrics', next: 'q2' },
+      { label: 'AI visibility metrics', next: 'q3_alt' }
+    ]
+  },
+
+  q2: {
+    section: 1,
+    pill: 'Onsite Discovery',
+    question: 'Why does this matter to the business right now?',
+    type: 'educate',
+    points: [],
+    choices: [
+      { label: 'Got their answer — continue', next: 'q3' }
+    ]
+  },
+
+  q3_alt: {
+    section: 1,
+    pill: 'Onsite Discovery',
+    question: 'Do you have specific AI visibility goals for this year? Like increasing mention rate, citation rate, or competitive position?',
+    type: 'question',
+    choices: [
+      { label: 'Yes — we have specific goals', next: 'q3' },
+      { label: 'Not really, still figuring it out', next: 'q3' }
+    ]
+  },
+
+  q3: {
+    section: 1,
+    pill: 'Onsite Discovery',
+    question: 'Is AI visibility a priority for you right now?',
+    type: 'question',
+    choices: [
+      { label: 'Yes — C-suite pressure', next: 'q4' },
+      { label: 'Not sure, still learning', next: 'q4' }
+    ]
+  },
+
+  q4: {
+    section: 1,
+    pill: 'Onsite Discovery',
+    question: 'There are 2 ways to increase your AI visibility and overall organic presence.',
+    sub: 'Are you thinking about your strategy today as it relates to your website and off your website?',
+    type: 'educate',
+    points: [
+      { label: '85% is driven by third-party citations', body: '85% of AI visibility is driven by third-party citations — what we call "Offsite."' },
+      { label: 'On-site content reinforces your off-site reputation', body: 'It\'s important to ensure your content on your website reinforces what the world is saying about you.' },
+      { label: 'Models look for consensus', body: 'We typically recommend a holistic strategy that encompasses both on-site and off-site.' }
+    ],
+    choices: [
+      { label: 'Got their answer — continue', next: null }
+    ]
   }
+
 };
 let TREE = OFFSITE_TREE;
 
