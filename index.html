@@ -1446,9 +1446,23 @@ const ONSITE_TREE = {
     question: 'Is it more challenging today to create NEW content or refreshing OLD content?',
     type: 'question',
     choices: [
-      { label: 'Creating new content', next: 'b2_links_question' },
-      { label: 'Refreshing old content', next: 'b2_links_question' },
-      { label: 'Both equally challenging', next: 'b2_links_question' }
+      { label: 'Creating new content', next: 'q6_airops_pitch' },
+      { label: 'Refreshing old content', next: 'q6_airops_pitch' },
+      { label: 'Both equally challenging', next: 'q6_airops_pitch' }
+    ]
+  },
+
+  q6_airops_pitch: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'AirOps has 4 years of foundation in SEO and has since evolved into helping brands like X, Y, Z optimize their content for both SEO & AEO.',
+    sub: 'Which content would be a priority for me to use as an example in the demo?',
+    type: 'educate',
+    points: [
+      { label: '', body: 'I\'d love to share a custom demo in our next call on how this could work for your team.' }
+    ],
+    choices: [
+      { label: 'Got their answer — continue', next: 'b2_links_question' }
     ]
   },
 
