@@ -1408,7 +1408,7 @@ const ONSITE_TREE = {
     type: 'question',
     choices: [
       { label: 'Both handled internally', next: 'q6_onsite_process' },
-      { label: 'Both handled with agency', next: null },
+      { label: 'Both handled with agency', next: 'q6_agency_same' },
       { label: 'Onsite internal, Offsite agency', next: null },
       { label: 'Offsite internal, Onsite agency', next: null },
       { label: 'Onsite internal, no backlinking today', next: null },
@@ -1464,6 +1464,224 @@ const ONSITE_TREE = {
     choices: [
       { label: 'Got their answer — continue', next: 'b2_links_question' }
     ]
+  },
+
+  /* ── Both handled with agency path ── */
+  q6_agency_same: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Is the same agency handling both your onsite content and your backlinking strategy?',
+    type: 'question',
+    choices: [
+      { label: 'Yes, same agency', next: 'q6_agency_onsite_process' },
+      { label: 'No, different agencies', next: 'q6_agency_onsite_process' }
+    ]
+  },
+
+  q6_agency_onsite_process: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Let\'s start with your agency\'s Onsite blog creation/refresh process. Walk me through your process working with them today from ideation to publish.',
+    type: 'educate',
+    points: [],
+    choices: [
+      { label: 'Got their answer — continue', next: 'q6_friction_agency' }
+    ]
+  },
+
+  q6_friction_agency: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Where\'s the most friction in that process — volume, quality, speed, or measurement?',
+    type: 'question',
+    choices: [
+      { label: 'Volume', next: 'q6_new_vs_old_agency' },
+      { label: 'Quality', next: 'q6_new_vs_old_agency' },
+      { label: 'Speed', next: 'q6_new_vs_old_agency' },
+      { label: 'Measurement', next: 'q6_new_vs_old_agency' }
+    ]
+  },
+
+  q6_new_vs_old_agency: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Is it more challenging today to create NEW content or refreshing OLD content?',
+    type: 'question',
+    choices: [
+      { label: 'Creating new content', next: 'q6_airops_pitch_agency' },
+      { label: 'Refreshing old content', next: 'q6_airops_pitch_agency' },
+      { label: 'Both equally challenging', next: 'q6_airops_pitch_agency' }
+    ]
+  },
+
+  q6_airops_pitch_agency: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'AirOps has 4 years of foundation in SEO and has since evolved into helping brands like X, Y, Z optimize their content for both SEO & AEO.',
+    sub: 'Which content would be a priority for me to use as an example in the demo?',
+    type: 'educate',
+    points: [
+      { label: '', body: 'I\'d love to share a custom demo in our next call on how this could work for your team.' }
+    ],
+    choices: [
+      { label: 'Got their answer — continue', next: 'b1_links_question' }
+    ]
+  },
+
+  /* ── Offsite agency path (reused from Offsite discovery) ── */
+  b1_links_question: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'How many backlinks are they getting you per month on average? What defines quality for those backlinks?',
+    type: 'educate',
+    points: [
+      { label: 'Listen for volume', body: 'Are they getting consistent placements, or is it sporadic?' },
+      { label: 'Listen for quality definition', body: '"High DA sites" or "authoritative publications" = your opening for the next card.' }
+    ],
+    choices: [
+      { label: 'Got their answer — continue', next: 'b1_cited_sites' }
+    ],
+    coaching: {
+      eyebrow: 'Active listening cues',
+      title: 'What to listen for',
+      body: 'Volume and quality definition are your two diagnostic signals. Low volume means the agency isn\'t executing at scale. "High DA" as a quality definition means they\'re optimizing for traditional search, not AI — that\'s your setup for the cited sites reframe.',
+    }
+  },
+
+  b1_cited_sites: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'Do you know if your agency is reaching out to highly cited sites?',
+    type: 'educate',
+    points: [
+      { label: 'Agencies optimize for DA', body: 'Most link-building agencies target high DA sites — that\'s the right call for Google, not AI.' },
+      { label: 'DA isn\'t the North Star for LLMs', body: 'LLMs pull from small to mid-sized publishers, many with no measurable DA.' },
+      { label: 'They\'re likely missing the sources that matter', body: 'If the agency is only chasing high-DA placements, they\'re skipping most of what drives AI mentions.' }
+    ],
+    choices: [
+      { label: 'Understood — continue', next: 'b1_cited_sites_pitch' }
+    ],
+    coaching: {
+      eyebrow: 'The core gap to expose',
+      title: 'The long-tail publisher gap',
+      body: 'High-DA targeting is the right instinct for Google — but LLMs don\'t work that way. They pull from thousands of niche, category-specific sites. Agencies without citation data simply don\'t know these sites exist.',
+      stat: { label: 'Reframe to use', text: '"In AI search, a mid-DA comparison site that covers your category is worth more than a placement on Forbes. Your agency is probably not targeting those sites."' }
+    }
+  },
+
+  b1_cited_sites_pitch: {
+    section: 3,
+    pill: 'Talking Point — Agency',
+    question: 'Share this with the prospect: why highly cited sites and volume are the new game.',
+    type: 'educate',
+    points: [
+      { label: 'DA is no longer the North Star', body: 'AI models don\'t rank by DA. A niche comparison site with DA 30 can drive more AI mentions than Forbes.' },
+      { label: 'The long tail is where AI lives', body: 'LLMs pull from small, category-specific publishers — not the big publications your agency targets.' },
+      { label: 'This is a volume game', body: '~65 citations per prompt × thousands of prompt variations = hundreds to thousands of placements needed.' }
+    ],
+    choices: [
+      { label: 'Prospect understands — continue', next: 'b1_domain_infra' }
+    ],
+    coaching: {
+      eyebrow: 'Delivering the reframe',
+      title: 'How to land this with the customer',
+      body: 'Lead with the DA reframe. The volume stat closes it: once they do the math, they understand why their current approach won\'t move the needle.',
+    }
+  },
+
+  b1_domain_infra: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'Does your agency know how to send high-volume outreach and set up domain infrastructure at scale?',
+    type: 'educate',
+    points: [
+      { label: 'The math is bigger than it looks', body: '~65 citations per prompt × 40-50 topic variations = hundreds to thousands of placements needed.' },
+      { label: 'This requires real infrastructure', body: 'Dedicated sending domains, warming sequences, and personalization at scale — not a standard agency setup.' },
+      { label: 'Most link-building agencies aren\'t built for this', body: 'Traditional agencies optimize for dozens of placements. AI visibility requires a fundamentally different scale.' }
+    ],
+    choices: [
+      { label: 'Got it — continue to agency diagnosis', next: 'b1_diagnosis' }
+    ],
+    coaching: {
+      eyebrow: 'The scale problem',
+      title: 'Why scale is a new requirement',
+      body: 'Traditional link building targets dozens of placements. AI visibility requires hundreds to thousands.',
+      stat: { label: 'Scale stat', text: 'One prompt = ~65 citations. One topic = 40-50 prompts. Moving your mention rate meaningfully requires hundreds to thousands of placements.' }
+    }
+  },
+
+  b1_diagnosis: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'Diagnose their agency relationship.',
+    type: 'educate',
+    points: [
+      { label: 'Read the room first', body: 'You\'ve surfaced the gaps — don\'t immediately pitch against the agency.' },
+      { label: 'Listen for frustration or openness', body: 'Unmet expectations, missed targets, or curiosity about switching are all green lights.' },
+      { label: 'If the door is closed, add on', body: 'Happy with agency → Offsite as a layer. Frustrated → position as a replacement.' }
+    ],
+    choices: [
+      { label: 'Diagnosed — continue to satisfaction check', next: 'b1_satisfaction' }
+    ],
+    coaching: {
+      eyebrow: 'Reading the agency relationship',
+      title: 'Don\'t rip and replace unless invited',
+      body: 'The agency gaps you just surfaced are real — but leading with "your agency is missing this" can backfire if the prospect loves their agency. Your job is to diagnose satisfaction, not create doubt.',
+      stat: { label: 'The rule', text: 'Happy agency = Offsite as a force multiplier ($2K/mo). Unhappy agency = Offsite fully managed as a replacement ($5K/mo).' }
+    }
+  },
+
+  b1_satisfaction: {
+    section: 3,
+    pill: 'Path B1 — Agency',
+    question: 'How satisfied is the prospect with their agency\'s results?',
+    type: 'question',
+    choices: [
+      { label: 'Happy with the agency', next: 'outcome_b1a' },
+      { label: 'Unhappy with the agency', next: 'outcome_b1b' }
+    ],
+    coaching: {
+      eyebrow: 'Routing to the right outcome',
+      title: 'How satisfaction shapes the recommendation',
+      body: 'Happy agency customers: the agency can keep executing — Offsite adds the citation data layer they\'re missing ($2K/mo self-serve). Unhappy agency customers: this is your opening to replace them entirely with a fully managed solution ($5K/mo).',
+    }
+  },
+
+  outcome_b1a: {
+    section: 4,
+    pill: 'Outcome — Self-Serve',
+    question: 'Keep the agency. Add Offsite self-serve at $2K/mo.',
+    type: 'outcome',
+    details: [
+      'Citation data + Influence Score-ranked target lists the agency can\'t find on their own',
+      'Personalized outreach emails at scale — each one written to the specific article and publication context',
+      'Every email is on-brand: pulls from AirOps Brand Kit for tone, product info, case studies, and awards',
+      'Agency executes using Offsite\'s targeting and templates — no change to the agency relationship'
+    ],
+    coaching: {
+      eyebrow: 'Closing the deal',
+      title: 'Why this works',
+      body: 'Their agency is good at execution — they just don\'t have the right targets or the right outreach. Offsite fills both gaps. Position it as a force multiplier.',
+      stat: { label: 'Timeline to set', text: '30-45 days to initial placements. 60-90 days for measurable AI visibility lift across ChatGPT, Claude, and Perplexity.' }
+    }
+  },
+
+  outcome_b1b: {
+    section: 4,
+    pill: 'Outcome — Fully Managed',
+    question: 'Replace the agency with Offsite fully managed at $5K/mo.',
+    type: 'outcome',
+    details: [
+      'End-to-end execution: domain infrastructure, outreach at scale, publisher negotiation',
+      'No agency dependency — Offsite owns the full motion',
+      'Better results: targeting AI-cited sources instead of just high-DA sites'
+    ],
+    coaching: {
+      eyebrow: 'Closing the deal',
+      title: 'Why this wins',
+      body: 'They\'re already paying for an agency that isn\'t hitting the mark. Offsite fully managed replaces that spend: better targeting, end-to-end execution, and measurement that closes the loop.',
+      stat: { label: 'Positioning line', text: '"Stop paying for DA metrics that don\'t move AI visibility. Offsite owns the full motion for $5K/mo — and you\'ll see initial placements in 30-45 days."' }
+    }
   },
 
   /* ── Offsite internal path (reused from Offsite discovery) ── */
