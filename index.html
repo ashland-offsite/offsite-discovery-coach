@@ -1462,7 +1462,20 @@ const ONSITE_TREE = {
       { label: '', body: 'I\'d love to share a custom demo in our next call on how this could work for your team.' }
     ],
     choices: [
-      { label: 'Got their answer — continue', next: 'b2_links_question' }
+      { label: 'Got their answer — continue', next: 'q6_offsite_intro' }
+    ]
+  },
+
+  q6_offsite_intro: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Now let\'s talk about your Offsite strategy so I can get a complete picture and set up the other half of the custom demo for you.',
+    type: 'educate',
+    points: [
+      { label: '', body: 'I\'d love to start with backlinking and we can talk more about Reddit & social in a separate convo.' }
+    ],
+    choices: [
+      { label: 'Continue', next: 'b2_links_question' }
     ]
   },
 
@@ -1524,7 +1537,20 @@ const ONSITE_TREE = {
       { label: '', body: 'I\'d love to share a custom demo in our next call on how this could work for your team.' }
     ],
     choices: [
-      { label: 'Got their answer — continue', next: 'b1_links_question' }
+      { label: 'Got their answer — continue', next: 'q6_offsite_intro_agency' }
+    ]
+  },
+
+  q6_offsite_intro_agency: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Now let\'s talk about your Offsite strategy so I can get a complete picture and set up the other half of the custom demo for you.',
+    type: 'educate',
+    points: [
+      { label: '', body: 'I\'d love to start with backlinking and we can talk more about Reddit & social in a separate convo.' }
+    ],
+    choices: [
+      { label: 'Continue', next: 'b1_links_question' }
     ]
   },
 
