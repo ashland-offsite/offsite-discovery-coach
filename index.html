@@ -1408,13 +1408,217 @@ const ONSITE_TREE = {
     question: 'Talk to me about your team. Who\'s handling creating SEO content today? Who\'s handling your backlinking strategy?',
     type: 'question',
     choices: [
-      { label: 'Both handled internally', next: null },
+      { label: 'Both handled internally', next: 'q6_onsite_process' },
       { label: 'Both handled with agency', next: null },
       { label: 'Onsite internal, Offsite agency', next: null },
       { label: 'Offsite internal, Onsite agency', next: null },
       { label: 'Onsite internal, no backlinking today', next: null },
       { label: 'Onsite agency, no backlinking today', next: null }
     ]
+  },
+
+  q6_onsite_process: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Let\'s start with your Onsite blog creation/refresh process. Walk me through your process today from ideation to publish.',
+    type: 'educate',
+    points: [],
+    choices: [
+      { label: 'Got their answer — continue', next: 'q6_friction' }
+    ]
+  },
+
+  q6_friction: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Where\'s the most friction in that process — volume, quality, speed, or measurement?',
+    type: 'question',
+    choices: [
+      { label: 'Volume', next: 'q6_new_vs_old' },
+      { label: 'Quality', next: 'q6_new_vs_old' },
+      { label: 'Speed', next: 'q6_new_vs_old' },
+      { label: 'Measurement', next: 'q6_new_vs_old' }
+    ]
+  },
+
+  q6_new_vs_old: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Is it more challenging today to create NEW content or refreshing OLD content?',
+    type: 'question',
+    choices: [
+      { label: 'Creating new content', next: 'b2_links_question' },
+      { label: 'Refreshing old content', next: 'b2_links_question' },
+      { label: 'Both equally challenging', next: 'b2_links_question' }
+    ]
+  },
+
+  /* ── Offsite internal path (reused from Offsite discovery) ── */
+  b2_links_question: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Ask the prospect: How many backlinks are you getting per month internally? What defines quality for you?',
+    type: 'educate',
+    points: [],
+    choices: [
+      { label: 'Got their answer — continue', next: 'b2_cited_sites' }
+    ],
+    coaching: {
+      eyebrow: 'Active listening cues',
+      title: 'What to listen for',
+      body: 'Internal teams often have less volume than agencies and the same DA-centric quality definition. Low volume usually means link building is manual and under-resourced — that\'s a signal the team can\'t scale this without help. "High DA" as a quality signal means they\'re optimizing for Google, not AI. Either answer sets up the cited-sites reframe on the next card. If you get both signals — low volume AND DA-focused — you have a strong case for fully managed.',
+    }
+  },
+
+  b2_cited_sites: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Do you know if you\'re reaching out to highly cited sites that AI is actually using as a source?',
+    type: 'educate',
+    points: [
+      { label: 'DA is no longer the North Star', body: 'AI models don\'t rank by DA. A niche comparison site with DA 30 can drive more AI mentions than Forbes.' },
+      { label: 'LLMs pull from the long tail', body: 'Small to mid-sized publishers, many with no measurable DA, dominate AI citations.' },
+      { label: 'High-DA-only = missing most of what matters', body: 'If you\'re only targeting well-known publications, you\'re skipping the sites that actually drive AI mentions.' }
+    ],
+    choices: [
+      { label: 'Understood — continue', next: 'b2_cited_sites_pitch' }
+    ],
+    coaching: {
+      eyebrow: 'The core gap to expose',
+      title: 'The long-tail gap for internal teams',
+      body: 'Internal teams face the same targeting problem as agencies — but often with less resources to fix it. They don\'t have citation data, don\'t know which niche publishers LLMs actually cite, and are optimizing for a metric (DA) that doesn\'t predict AI visibility. Offsite\'s Influence Score gives them the target list they don\'t have — whether they execute via self-serve or fully managed.',
+      stat: { label: 'Reframe to use', text: '"The sites that drive AI mentions are often ones you\'ve never heard of — small, category-specific publishers with no DA score. Your current process probably isn\'t finding them."' }
+    }
+  },
+
+  b2_cited_sites_pitch: {
+    section: 3,
+    pill: 'Talking Point — Internal',
+    question: 'Why highly cited sites and volume are the new game.',
+    type: 'educate',
+    points: [
+      { label: 'This is a volume game', body: '~65 citations per prompt × thousands of prompt variations = hundreds to thousands of placements needed.' }
+    ],
+    choices: [
+      { label: 'Prospect understands — continue', next: 'b2_check1' }
+    ],
+    coaching: {
+      eyebrow: 'Delivering the reframe',
+      title: 'How to land this with the customer',
+      body: 'Lead with the DA reframe — it\'s the most counterintuitive point for marketers who\'ve optimized for Google. The volume stat closes it: most in-house programs do 10-20 placements a month at best. When they do the math on what\'s actually needed, it reframes the entire scope of the effort and makes the case for external support.',
+      stat: { label: 'The volume reality', text: 'Most internal link-building programs produce 10-20 placements/month. AI visibility at scale requires hundreds to thousands. The gap is too large to close manually.' }
+    }
+  },
+
+  b2_check1: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Check 1 of 3: Do you have the outbound infrastructure to run this internally at scale?',
+    type: 'question',
+    sub: 'Setting up outbound infrastructure is genuinely hard — separate sending domains, domain warming, DMARC/SPF/DKIM config, and deliverability management. Most teams underestimate the setup time and ongoing maintenance.',
+    choices: [
+      { label: 'Yes, we can handle that', next: 'b2_check2' },
+      { label: 'Partially — would need support', next: 'outcome_managed' },
+      { label: 'No / Not sure', next: 'outcome_managed' }
+    ],
+    coaching: {
+      eyebrow: 'Qualification check 1 of 3',
+      title: 'Why internal infra is harder than it looks',
+      body: 'Most teams think they can use their main company email domain for outreach — that\'s a fast path to getting the domain blacklisted. Proper outbound infrastructure means: buying and warming separate sending domains, configuring DNS records (DMARC, SPF, DKIM), managing sending limits, and monitoring deliverability across inboxes. It\'s 1-2 weeks of setup before a single email goes out — and it breaks if not maintained.',
+      stat: { label: 'The hidden cost', text: 'Outbound infra setup typically takes 1-2 weeks before any outreach can start. Ongoing deliverability management adds 2-4 hours/week. Most internal teams don\'t budget for this.' }
+    }
+  },
+
+  b2_check2: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Check 2 of 3: Can you find contact information for thousands of small, niche publishers at scale?',
+    type: 'question',
+    sub: 'One prompt averages 65 citations. Across thousands of prompt variations, most brands need to reach thousands of publishers — the majority of which are small sites with no listed contact info.',
+    choices: [
+      { label: 'Yes, we have that covered', next: 'b2_check3' },
+      { label: 'Partially — we struggle with smaller sites', next: 'outcome_managed' },
+      { label: 'No / Not sure', next: 'outcome_selfserve' }
+    ],
+    coaching: {
+      eyebrow: 'Qualification check 2 of 3',
+      title: 'Why contact data is the hardest part',
+      body: 'Finding the editor at TechCrunch is easy — they\'re everywhere. Finding the right contact at a niche, AI-cited industry blog with 3 contributors and no contact page is a completely different problem. Now multiply that by thousands of publishers.',
+      stat: { label: 'The scale problem', text: '1 prompt = ~65 citations. Thousands of prompt variations = thousands of publishers to contact. Most are small sites where finding the right person takes 20-30 minutes of manual research — per site.' }
+    }
+  },
+
+  b2_check3: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'Check 3 of 3: Can you write personalized outreach at scale and manage follow-up sequences?',
+    type: 'question',
+    choices: [
+      { label: 'Yes, we can do all of this', next: 'outcome_disqualify' },
+      { label: 'No / Partially — this is a gap', next: 'outcome_managed' }
+    ],
+    coaching: {
+      eyebrow: 'Qualification check 3 of 3',
+      title: 'Check 3: Outreach execution',
+      body: 'If they pass all three checks, they have the full execution stack to run this themselves. Self-serve data and templates may still add speed and quality — but the urgency is lower.',
+    }
+  },
+
+  /* ── Outcomes ── */
+  outcome_managed: {
+    section: 4,
+    pill: 'Outcome — Fully Managed',
+    question: 'Recommend Offsite fully managed at $5K/mo.',
+    type: 'outcome',
+    details: [
+      'No infrastructure setup required — Offsite handles everything',
+      'No outreach management — end-to-end execution included',
+      'No publisher negotiation — Offsite owns those relationships',
+      'Removes all complexity so the team can focus on other priorities'
+    ],
+    coaching: {
+      eyebrow: 'Closing the deal',
+      title: 'Position it as buying the outcome',
+      body: 'They want the result (AI Mentions, visibility) but don\'t have the execution stack to get there. Fully managed removes every barrier. Don\'t sell them the work — sell them the outcome: "You\'ll see initial placements in 30-45 days. We own everything end to end."',
+      stat: { label: 'Timeline anchor', text: '30-45 days to initial placements. 60-90 days for measurable AI visibility lift across ChatGPT, Claude, and Perplexity.' }
+    }
+  },
+
+  outcome_selfserve: {
+    section: 4,
+    pill: 'Outcome — Self-Serve',
+    question: 'Recommend Offsite self-serve agent at $2K/mo.',
+    type: 'outcome',
+    details: [
+      'Provides: citation data, target source lists, outreach templates + email contacts',
+      'They execute the outreach using Offsite\'s data and targeting',
+      'Fills the specific gap (data, contacts, or templates) while they own execution'
+    ],
+    coaching: {
+      eyebrow: 'Closing the deal',
+      title: 'When self-serve is the right fit',
+      body: 'They have real execution capability but are missing inputs — citation data, the right contacts, outreach templates. Key: 85% of AI citations come from listicles, comparisons, and reviews — not the targets most teams would naturally find.',
+      stat: { label: 'The precision advantage', text: 'Offsite\'s Influence Score (citation frequency + DA + content relevance) identifies the exact publisher targets most internal teams would never find on their own.' }
+    }
+  },
+
+  outcome_disqualify: {
+    section: 4,
+    pill: 'Assessment — Strong Internal',
+    question: 'This prospect has the full internal stack. Acknowledge it.',
+    type: 'outcome',
+    isDisqualify: true,
+    details: [
+      'Domain infrastructure: ✓ covered',
+      'Contact data at scale: ✓ covered',
+      'Outreach execution: ✓ covered',
+      'Consider: Offsite data may still add speed and quality — but the fit isn\'t urgent'
+    ],
+    coaching: {
+      eyebrow: 'Staying warm',
+      title: 'How to handle a strong internal team',
+      body: 'Don\'t force a fit. Acknowledge their capability and consider whether the data quality or speed advantage is compelling enough to close now. If not, keep them warm — team changes, budget shifts, and scale challenges often create a re-entry point.',
+    }
   }
 
 };
