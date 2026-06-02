@@ -1409,7 +1409,7 @@ const ONSITE_TREE = {
     choices: [
       { label: 'Both handled internally', next: 'q6_onsite_process' },
       { label: 'Both handled with agency', next: 'q6_agency_same' },
-      { label: 'Onsite internal, Offsite agency', next: null },
+      { label: 'Onsite internal, Offsite agency', next: 'q6_onsite_process_oia' },
       { label: 'Offsite internal, Onsite agency', next: null },
       { label: 'Onsite internal, no backlinking today', next: null },
       { label: 'Onsite agency, no backlinking today', next: null }
@@ -1476,6 +1476,57 @@ const ONSITE_TREE = {
     ],
     choices: [
       { label: 'Continue', next: 'b2_links_question' }
+    ]
+  },
+
+  /* ── Onsite Internal, Offsite Agency path ── */
+  q6_onsite_process_oia: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Let\'s start with your Onsite blog creation/refresh process. Walk me through your process today from ideation to publish.',
+    type: 'educate',
+    points: [],
+    choices: [
+      { label: 'Got their answer — continue', next: 'q6_friction_oia' }
+    ]
+  },
+
+  q6_friction_oia: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Where\'s the most friction in that process — volume, quality, speed, or measurement?',
+    type: 'question',
+    choices: [
+      { label: 'Volume', next: 'q6_new_vs_old_oia' },
+      { label: 'Quality', next: 'q6_new_vs_old_oia' },
+      { label: 'Speed', next: 'q6_new_vs_old_oia' },
+      { label: 'Measurement', next: 'q6_new_vs_old_oia' }
+    ]
+  },
+
+  q6_new_vs_old_oia: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Is it more challenging today to create NEW content or refreshing OLD content?',
+    type: 'question',
+    choices: [
+      { label: 'Creating new content', next: 'q6_airops_pitch_oia' },
+      { label: 'Refreshing old content', next: 'q6_airops_pitch_oia' },
+      { label: 'Both equally challenging', next: 'q6_airops_pitch_oia' }
+    ]
+  },
+
+  q6_airops_pitch_oia: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'AirOps has 4 years of foundation in SEO and has since evolved into helping brands like X, Y, Z optimize their content for both SEO & AEO.',
+    sub: 'Which content would be a priority for me to use as an example in the demo?',
+    type: 'educate',
+    points: [
+      { label: '', body: 'I\'d love to share a custom demo in our next call on how this could work for your team.' }
+    ],
+    choices: [
+      { label: 'Got their answer — continue', next: 'q6_offsite_intro_agency' }
     ]
   },
 
