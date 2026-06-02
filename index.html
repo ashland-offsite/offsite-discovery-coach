@@ -1398,7 +1398,22 @@ const ONSITE_TREE = {
       { label: 'Next step', body: 'Do you mind if I ask you some questions about your current process on your website and off your website today?' }
     ],
     choices: [
-      { label: 'Yes — let\'s dig in', next: null }
+      { label: 'Yes — let\'s dig in', next: 'q6' }
+    ]
+  },
+
+  q6: {
+    section: 2,
+    pill: 'Onsite Discovery',
+    question: 'Talk to me about your team. Who\'s handling creating SEO content today? Who\'s handling your backlinking strategy?',
+    type: 'question',
+    choices: [
+      { label: 'Both handled internally', next: null },
+      { label: 'Both handled with agency', next: null },
+      { label: 'Onsite internal, Offsite agency', next: null },
+      { label: 'Offsite internal, Onsite agency', next: null },
+      { label: 'Onsite internal, no backlinking today', next: null },
+      { label: 'Onsite agency, no backlinking today', next: null }
     ]
   }
 
