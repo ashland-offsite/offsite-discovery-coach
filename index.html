@@ -1226,13 +1226,34 @@ const OFFSITE_TREE = {
     question: 'Check 3 of 3: Can you write personalized outreach at scale and manage follow-up sequences?',
     type: 'question',
     choices: [
-      { label: 'Yes, we can do all of this', next: 'outcome_disqualify' },
-      { label: 'No / Partially — this is a gap', next: 'outcome_managed' }
+      { label: 'No / Partially — this is a gap', next: 'b2_self_serve_pitch' }
     ],
     coaching: {
       eyebrow: 'Qualification check 3 of 3',
       title: 'Check 3: Outreach execution',
       body: 'If they pass all three checks, they have the full execution stack to run this themselves. Self-serve data and templates may still add speed and quality — but the urgency is lower. If they\'re missing outreach execution capability, self-serve fills that gap while they own the relationships.',
+    }
+  },
+
+  b2_self_serve_pitch: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'You can use the citation data in AirOps to run this yourself — or we can take it off your plate for $5K+/mo.',
+    type: 'educate',
+    points: [
+      { label: 'Is it really worth your team\'s time?', body: '15–20 placements/mo minimum to drive a meaningful mention rate increase (65 citations/prompt).' },
+      { label: 'If you\'re already buying AI Visibility', body: 'Your team can attempt this yourselves first.' },
+      { label: 'If you\'d rather we take it off your plate', body: '$5K+/mo, fully managed.' }
+    ],
+    choices: [
+      { label: 'We\'ll handle it ourselves', next: 'outcome_disqualify' },
+      { label: 'Take it off our plate — fully managed', next: 'outcome_managed' }
+    ],
+    coaching: {
+      eyebrow: 'The self-serve vs. managed fork',
+      title: 'How to read this moment',
+      body: 'If they say they\'ll handle it themselves, don\'t fight it — if they\'re buying AI Visibility, the data is there and they can try. Most teams who go this route come back for managed within 60-90 days once they hit the execution wall. If they\'re on the fence, lean into the volume math: 15-20 placements/month is the floor for meaningful impact, and that requires consistent infrastructure, outreach, and follow-up that most teams can\'t sustain alongside their day jobs.',
+      stat: { label: 'The volume reality', text: 'Minimum 15–20 placements/month to start moving mention rate. At 65 citations per prompt × hundreds of prompt variations, the full opportunity requires hundreds of publisher relationships — not dozens.' }
     }
   },
 
@@ -1865,13 +1886,34 @@ const ONSITE_TREE = {
     question: 'Check 3 of 3: Can you write personalized outreach at scale and manage follow-up sequences?',
     type: 'question',
     choices: [
-      { label: 'Yes, we can do all of this', next: 'outcome_disqualify' },
-      { label: 'No / Partially — this is a gap', next: 'outcome_managed' }
+      { label: 'No / Partially — this is a gap', next: 'b2_self_serve_pitch' }
     ],
     coaching: {
       eyebrow: 'Qualification check 3 of 3',
       title: 'Check 3: Outreach execution',
       body: 'If they pass all three checks, they have the full execution stack to run this themselves. Self-serve data and templates may still add speed and quality — but the urgency is lower.',
+    }
+  },
+
+  b2_self_serve_pitch: {
+    section: 3,
+    pill: 'Path B2 — Internal',
+    question: 'You can use the citation data in AirOps to run this yourself — or we can take it off your plate for $5K+/mo.',
+    type: 'educate',
+    points: [
+      { label: 'Is it really worth your team\'s time?', body: '15–20 placements/mo minimum to drive a meaningful mention rate increase (65 citations/prompt).' },
+      { label: 'If you\'re already buying AI Visibility', body: 'Your team can attempt this yourselves first.' },
+      { label: 'If you\'d rather we take it off your plate', body: '$5K+/mo, fully managed.' }
+    ],
+    choices: [
+      { label: 'We\'ll handle it ourselves', next: 'outcome_disqualify' },
+      { label: 'Take it off our plate — fully managed', next: 'outcome_managed' }
+    ],
+    coaching: {
+      eyebrow: 'The self-serve vs. managed fork',
+      title: 'How to read this moment',
+      body: 'If they say they\'ll handle it themselves, don\'t fight it — if they\'re buying AI Visibility, the data is there and they can try. Most teams who go this route come back for managed within 60-90 days once they hit the execution wall. If they\'re on the fence, lean into the volume math: 15-20 placements/month is the floor for meaningful impact, and that requires consistent infrastructure, outreach, and follow-up that most teams can\'t sustain alongside their day jobs.',
+      stat: { label: 'The volume reality', text: 'Minimum 15–20 placements/month to start moving mention rate. At 65 citations per prompt × hundreds of prompt variations, the full opportunity requires hundreds of publisher relationships — not dozens.' }
     }
   },
 
