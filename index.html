@@ -948,39 +948,57 @@ const OFFSITE_TREE = {
   b2h_check_contacts: {
     section: 3,
     pill: 'Path B2 — Hypothetical Internal',
-    question: 'Check 1 of 2: Would your team have a way to find contact info for thousands of small, niche publishers — most of which have no listed contact page?',
+    question: 'Check 1 of 3: Would your team have a way to find contact info for thousands of small, niche publishers — most of which have no listed contact page?',
     type: 'educate',
     sub: 'One prompt averages 65 citations. Across thousands of prompt variations, most brands need to reach thousands of publishers — the majority of which are small sites with no public contact info.',
     points: [
       { label: '⚠ Don\'t move on until they acknowledge this gap', body: 'Even if they have experience finding email data, they won\'t be able to find more than 30% of publisher contacts. AirOps has spent 6+ months connecting into a dozen data sources to find and verify 80% of publisher email addresses — that\'s not something a team can replicate.' }
     ],
     choices: [
-      { label: 'Partially — we\'d struggle with smaller sites', next: 'outcome_managed' },
-      { label: 'No / Not sure', next: 'outcome_managed' }
+      { label: 'Partially — we\'d struggle with smaller sites', next: 'b2h_check_infra' },
+      { label: 'No / Not sure', next: 'b2h_check_infra' }
     ],
     coaching: {
-      eyebrow: 'Qualification check 1 of 2',
+      eyebrow: 'Qualification check 1 of 3',
       title: 'Why contact data is the hardest part',
       body: 'Finding the editor at TechCrunch is easy. Finding the right contact at a niche AI-cited industry blog with 3 contributors and no contact page is a completely different problem — and you need to do it at scale. Most internal teams can handle big publications but the long-tail sites that actually drive AI mentions have no public contact info, no media kit, and no obvious outreach path. Even teams with access to data tools like Apollo or ZoomInfo max out around 30% coverage for niche publishers. AirOps has spent 6+ months building connections across a dozen data sources to achieve 80% verified coverage.',
       stat: { label: 'The data advantage', text: 'AirOps verifies 80% of publisher email addresses across thousands of niche sites — built over 6+ months from a dozen data sources. No internal team can replicate this coverage.' }
     }
   },
 
+  b2h_check_infra: {
+    section: 3,
+    pill: 'Path B2 — Hypothetical Internal',
+    question: 'Check 2 of 3: Would your team have the time to set up dedicated outbound infrastructure for email outreach at scale?',
+    type: 'question',
+    sub: 'Outbound infrastructure means separate sending domains, warming sequences, and DMARC/SPF/DKIM config — needed before a single email goes out. Most teams underestimate the setup time and ongoing maintenance.',
+    choices: [
+      { label: 'Partially — would need support', next: 'b2h_check_execution' },
+      { label: 'No / Not sure', next: 'b2h_check_execution' }
+    ],
+    coaching: {
+      eyebrow: 'Qualification check 2 of 3',
+      title: 'Why outbound infra is harder than it looks',
+      body: 'Most teams think they can use their main company email domain for outreach — that\'s a fast path to getting the domain blacklisted. Proper outbound infrastructure means: buying and warming separate sending domains, configuring DNS records (DMARC, SPF, DKIM), managing sending limits, and monitoring deliverability across inboxes. It\'s 1-2 weeks of setup before a single email goes out — and it breaks if not maintained. If they don\'t have this already, fully managed removes all of it.',
+      stat: { label: 'The hidden cost', text: 'Outbound infra setup typically takes 1-2 weeks before any outreach can start. Ongoing deliverability management adds 2-4 hours/week. Most internal teams don\'t budget for this.' }
+    }
+  },
+
   b2h_check_execution: {
     section: 3,
     pill: 'Path B2 — Hypothetical Internal',
-    question: 'Check 2 of 2: Would your team have the time or knowledge to set up dedicated outbound infrastructure AND write personalized outreach at scale?',
+    question: 'Check 3 of 3: Would your team have the time to write personalized outreach at scale and manage follow-up sequences?',
     type: 'question',
-    sub: 'Outbound infrastructure means separate sending domains, warming sequences, and DMARC/SPF/DKIM config — needed before a single email goes out. Personalized outreach means emails tailored to each publisher\'s specific content and context.',
+    sub: 'Personalized outreach means emails tailored to each publisher\'s specific content and context — not a generic template blast. Follow-up sequences require ongoing monitoring and response management.',
     choices: [
       { label: 'Partially — some gaps here', next: 'b2h_self_serve_pitch' },
       { label: 'No / Not sure', next: 'outcome_managed' }
     ],
     coaching: {
-      eyebrow: 'Qualification check 2 of 2',
-      title: 'Two gaps, one question',
-      body: 'This card combines the two hardest execution gaps: outbound infrastructure and personalized outreach at scale. Infrastructure is the technical prerequisite — most teams underestimate it (separate domains, DNS config, deliverability management, 1-2 weeks setup before a single email goes out). Personalized outreach is the volume problem: Offsite writes emails tailored to each article, publication context, and where the brand fits in — pulling from the brand\'s own knowledge base and Brand Kit. Doing this manually for hundreds of publishers isn\'t realistic.',
-      stat: { label: 'The hidden cost', text: 'Outbound infra setup: 1-2 weeks before any outreach can start. Personalized outreach at scale: Offsite automates this using the brand\'s own tone guidelines, product info, case studies, and awards.' }
+      eyebrow: 'Qualification check 3 of 3',
+      title: 'The outreach execution gap',
+      body: 'Personalized outreach is the volume problem: Offsite writes emails tailored to each article, publication context, and where the brand fits in — pulling from the brand\'s own knowledge base and Brand Kit. Doing this manually for hundreds of publishers isn\'t realistic. If they\'re partially capable, the self-serve pitch gives them a path. If they have no capacity here, fully managed is the answer.',
+      stat: { label: 'The scale problem', text: 'Personalized outreach at scale: Offsite automates this using the brand\'s own tone guidelines, product info, case studies, and awards. Manual execution at this volume is a full-time job.' }
     }
   },
 
@@ -1190,7 +1208,7 @@ const OFFSITE_TREE = {
     sub: 'Setting up outbound infrastructure is genuinely hard — separate sending domains, domain warming, DMARC/SPF/DKIM config, and deliverability management. Most teams underestimate the setup time and ongoing maintenance.',
     choices: [
       { label: 'Partially — would need support', next: 'b2_check2' },
-      { label: 'No / Not sure', next: 'outcome_managed' }
+      { label: 'No / Not sure', next: 'b2_check2' }
     ],
     coaching: {
       eyebrow: 'Qualification check 1 of 3',
@@ -1208,7 +1226,7 @@ const OFFSITE_TREE = {
     sub: 'One prompt averages 65 citations. Across thousands of prompt variations, most brands need to reach thousands of publishers — the majority of which are small sites with no listed contact info.',
     choices: [
       { label: 'Partially — we struggle with smaller sites', next: 'b2_check3' },
-      { label: 'No / Not sure', next: 'outcome_managed' }
+      { label: 'No / Not sure', next: 'b2_check3' }
     ],
     coaching: {
       eyebrow: 'Qualification check 2 of 3',
@@ -1848,7 +1866,7 @@ const ONSITE_TREE = {
     sub: 'Setting up outbound infrastructure is genuinely hard — separate sending domains, domain warming, DMARC/SPF/DKIM config, and deliverability management. Most teams underestimate the setup time and ongoing maintenance.',
     choices: [
       { label: 'Partially — would need support', next: 'b2_check2' },
-      { label: 'No / Not sure', next: 'outcome_managed' }
+      { label: 'No / Not sure', next: 'b2_check2' }
     ],
     coaching: {
       eyebrow: 'Qualification check 1 of 3',
@@ -1866,7 +1884,7 @@ const ONSITE_TREE = {
     sub: 'One prompt averages 65 citations. Across thousands of prompt variations, most brands need to reach thousands of publishers — the majority of which are small sites with no listed contact info.',
     choices: [
       { label: 'Partially — we struggle with smaller sites', next: 'b2_check3' },
-      { label: 'No / Not sure', next: 'outcome_managed' }
+      { label: 'No / Not sure', next: 'b2_check3' }
     ],
     coaching: {
       eyebrow: 'Qualification check 2 of 3',
