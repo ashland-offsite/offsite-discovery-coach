@@ -990,12 +990,12 @@ const OFFSITE_TREE = {
     question: 'You can use the citation data in AirOps to run this yourself — or we can take it off your plate for $5K+/mo.',
     type: 'educate',
     points: [
-      { label: 'Is it really worth your team\'s time?', body: 'To move the needle you need at least 15–20 placements/month at minimum. With ~65 citations per prompt across thousands of prompt variations, the actual volume needed is in the hundreds. That\'s a full-time effort — not a side project.' },
-      { label: 'If you\'re already buying AI Visibility', body: 'The citation data is included. Your team can use it to build your own outreach process — but the infrastructure and execution still need to be owned internally.' },
-      { label: 'If you\'d rather we handle it', body: 'Fully managed at $5K+/mo. We own the infrastructure, the contacts, the outreach, and the placements. You see results without the operational lift.' }
+      { label: 'Is it really worth your team\'s time?', body: '15–20 placements/mo minimum to drive a meaningful mention rate increase (65 citations/prompt).' },
+      { label: 'If you\'re already buying AI Visibility', body: 'Your team can attempt this yourselves first.' },
+      { label: 'If you\'d rather we take it off your plate', body: '$5K+/mo, fully managed.' }
     ],
     choices: [
-      { label: 'We\'ll handle it ourselves — already buying AI Visibility', next: 'outcome_selfserve' },
+      { label: 'We\'ll handle it ourselves', next: 'outcome_disqualify' },
       { label: 'Take it off our plate — fully managed', next: 'outcome_managed' }
     ],
     coaching: {
