@@ -973,8 +973,7 @@ const OFFSITE_TREE = {
     type: 'question',
     sub: 'Outbound infrastructure means separate sending domains, warming sequences, and DMARC/SPF/DKIM config — needed before a single email goes out. Personalized outreach means emails tailored to each publisher\'s specific content and context.',
     choices: [
-      { label: 'Yes, we could handle all of this', next: 'outcome_disqualify' },
-      { label: 'Partially — some gaps here', next: 'outcome_managed' },
+      { label: 'Partially — some gaps here', next: 'b2h_self_serve_pitch' },
       { label: 'No / Not sure', next: 'outcome_managed' }
     ],
     coaching: {
@@ -982,6 +981,28 @@ const OFFSITE_TREE = {
       title: 'Two gaps, one question',
       body: 'This card combines the two hardest execution gaps: outbound infrastructure and personalized outreach at scale. Infrastructure is the technical prerequisite — most teams underestimate it (separate domains, DNS config, deliverability management, 1-2 weeks setup before a single email goes out). Personalized outreach is the volume problem: Offsite writes emails tailored to each article, publication context, and where the brand fits in — pulling from the brand\'s own knowledge base and Brand Kit. Doing this manually for hundreds of publishers isn\'t realistic.',
       stat: { label: 'The hidden cost', text: 'Outbound infra setup: 1-2 weeks before any outreach can start. Personalized outreach at scale: Offsite automates this using the brand\'s own tone guidelines, product info, case studies, and awards.' }
+    }
+  },
+
+  b2h_self_serve_pitch: {
+    section: 3,
+    pill: 'Path B2 — Hypothetical Internal',
+    question: 'You can use the citation data in AirOps to run this yourself — or we can take it off your plate for $5K+/mo.',
+    type: 'educate',
+    points: [
+      { label: 'Is it really worth your team\'s time?', body: 'To move the needle you need at least 15–20 placements/month at minimum. With ~65 citations per prompt across thousands of prompt variations, the actual volume needed is in the hundreds. That\'s a full-time effort — not a side project.' },
+      { label: 'If you\'re already buying AI Visibility', body: 'The citation data is included. Your team can use it to build your own outreach process — but the infrastructure and execution still need to be owned internally.' },
+      { label: 'If you\'d rather we handle it', body: 'Fully managed at $5K+/mo. We own the infrastructure, the contacts, the outreach, and the placements. You see results without the operational lift.' }
+    ],
+    choices: [
+      { label: 'We\'ll handle it ourselves — already buying AI Visibility', next: 'outcome_selfserve' },
+      { label: 'Take it off our plate — fully managed', next: 'outcome_managed' }
+    ],
+    coaching: {
+      eyebrow: 'The self-serve vs. managed fork',
+      title: 'How to read this moment',
+      body: 'If they say they\'ll handle it themselves, don\'t fight it — if they\'re buying AI Visibility, the data is there and they can try. Most teams who go this route come back for managed within 60-90 days once they hit the execution wall. If they\'re on the fence, lean into the volume math: 15-20 placements/month is the floor for meaningful impact, and that requires consistent infrastructure, outreach, and follow-up that most teams can\'t sustain alongside their day jobs.',
+      stat: { label: 'The volume reality', text: 'Minimum 15–20 placements/month to start moving mention rate. At 65 citations per prompt × hundreds of prompt variations, the full opportunity requires hundreds of publisher relationships — not dozens.' }
     }
   },
 
