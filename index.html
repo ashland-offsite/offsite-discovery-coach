@@ -949,18 +949,20 @@ const OFFSITE_TREE = {
     section: 3,
     pill: 'Path B2 — Hypothetical Internal',
     question: 'Check 1 of 2: Would your team have a way to find contact info for thousands of small, niche publishers — most of which have no listed contact page?',
-    type: 'question',
+    type: 'educate',
     sub: 'One prompt averages 65 citations. Across thousands of prompt variations, most brands need to reach thousands of publishers — the majority of which are small sites with no public contact info.',
+    points: [
+      { label: '⚠ Don\'t move on until they acknowledge this gap', body: 'Even if they have experience finding email data, they won\'t be able to find more than 30% of publisher contacts. AirOps has spent 6+ months connecting into a dozen data sources to find and verify 80% of publisher email addresses — that\'s not something a team can replicate.' }
+    ],
     choices: [
-      { label: 'Yes, we could handle that', next: 'b2h_check_execution' },
       { label: 'Partially — we\'d struggle with smaller sites', next: 'outcome_managed' },
       { label: 'No / Not sure', next: 'outcome_managed' }
     ],
     coaching: {
       eyebrow: 'Qualification check 1 of 2',
       title: 'Why contact data is the hardest part',
-      body: 'Finding the editor at TechCrunch is easy. Finding the right contact at a niche AI-cited industry blog with 3 contributors and no contact page is a completely different problem — and you need to do it at scale. Most internal teams can handle big publications but the long-tail sites that actually drive AI mentions have no public contact info, no media kit, and no obvious outreach path. That\'s exactly what Offsite solves.',
-      stat: { label: 'The scale problem', text: '1 prompt = ~65 citations. Thousands of prompt variations = thousands of publishers to contact. Most are small sites where finding the right person takes 20-30 minutes of manual research — per site.' }
+      body: 'Finding the editor at TechCrunch is easy. Finding the right contact at a niche AI-cited industry blog with 3 contributors and no contact page is a completely different problem — and you need to do it at scale. Most internal teams can handle big publications but the long-tail sites that actually drive AI mentions have no public contact info, no media kit, and no obvious outreach path. Even teams with access to data tools like Apollo or ZoomInfo max out around 30% coverage for niche publishers. AirOps has spent 6+ months building connections across a dozen data sources to achieve 80% verified coverage.',
+      stat: { label: 'The data advantage', text: 'AirOps verifies 80% of publisher email addresses across thousands of niche sites — built over 6+ months from a dozen data sources. No internal team can replicate this coverage.' }
     }
   },
 
